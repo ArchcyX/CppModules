@@ -1,0 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   megaphone.cpp                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alermi <alermi@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/05 14:52:10 by alermi            #+#    #+#             */
+/*   Updated: 2025/09/05 15:49:12 by alermi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <iostream>
+#include <cctype>
+
+int main(int argc, char **argv)
+{
+    if (argc == 1)
+        std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
+    for (int i = 1; i < argc; ++i)
+    {
+        for (int j = 0; argv[i][j]; j++)
+            std::cout << (char)toupper(argv[i][j]);
+    }
+    return (0);
+}
