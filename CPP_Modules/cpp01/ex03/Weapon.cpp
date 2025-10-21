@@ -16,3 +16,14 @@ Weapon::Weapon(std::string printInfo)
 {
 	std::cout << printInfo << std::endl;
 }
+
+const std::string& Weapon::getType(void)
+{
+	return (this->type);
+}
+
+void	Weapon::setType(const std::string& type)
+{
+	this->type = type;
+}
+
