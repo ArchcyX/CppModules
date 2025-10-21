@@ -23,7 +23,9 @@ class HumanB
 		Weapon* weapon;
 
 	public:
-		
+		HumanB();
+		~HumanB();
+		void	attack();	
 };
 
 #endif

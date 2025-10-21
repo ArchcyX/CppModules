@@ -10,3 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "Weapon.hpp"
+
+Weapon::Weapon(std::string printInfo)
+{
+	std::cout << printInfo << std::endl;
+}
