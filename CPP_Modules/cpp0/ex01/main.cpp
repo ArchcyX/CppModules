@@ -51,8 +51,8 @@ Contact createContact()
 	Contact newContact;
 	std::string input;
 
-	newContact.setFirstName(getInput("Enter First Name:"));
-	newContact.setLastName(getInput("Enter Last Name:"));
+	newContact.setFirstName(getInput("Enter First Name: "));
+	newContact.setLastName(getInput("Enter Last Name: "));
 	newContact.setNickName(getInput("Enter Nickname: "));
 	newContact.setPhoneNumber(getInput("Enter Phone Number: "));
 	newContact.setDarkestSecret(getInput("Enter Darkest Secret: "));
@@ -89,10 +89,10 @@ int	main(void)
 			phonebook.addContact(createContact());
 			std::cout << "" << std::endl;
 			std::system("clear");
-			phonebook.displayContacts();
 		}
 		else if (controller(input, "SEARCH"))
 		{
+				phonebook.displayContacts();
 				phonebook.searchContact();
 				std::cout << "" << std::endl;
 		}
@@ -101,7 +101,6 @@ int	main(void)
 		else {
 			
 			std::system("clear");
-			phonebook.displayContacts();
 			std::cout << "Invalid option. Please try again." << std::endl << std::endl;
 		}
 	}
