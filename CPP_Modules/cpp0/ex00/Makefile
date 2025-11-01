@@ -3,27 +3,33 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: alermi <alermi@student.42kocaeli.com.tr>   +#+  +:+       +#+         #
+#    By: alermi <alermi@student.42kocaeli.tr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/09/05 14:58:25 by alermi            #+#    #+#              #
-#    Updated: 2025/09/05 14:58:27 by alermi           ###   ########.fr        #
+#    Created: 2025/09/06 11:25:24 by alermi            #+#    #+#              #
+#    Updated: 2025/09/06 12:57:13 by alermi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = megaphone
-CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRC = megaphone.cpp
-OBJ = $(SRC:.cpp=.o)
+CXXFLAGS = -std=c++98 -Wall -Wextra -Werror 
+
+CXX = c++
+
+SRCS = megaphone.cpp
+
+OBJS = $(SRCS:.cpp=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJ)
+$(NAME): $(OBJS)
+	$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJS)
+
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJ)
+	rm -f $(OBJS)
 
 fclean: clean
 	rm -f $(NAME)
@@ -31,3 +37,4 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re
+

@@ -3,55 +3,108 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alermi <alermi@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
+/*   By: alermi <alermi@student.42kocaeli.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/05 17:13:37 by alermi            #+#    #+#             */
-/*   Updated: 2025/09/05 17:19:28 by alermi           ###   ########.fr       */
+/*   Created: 2025/09/06 13:00:12 by alermi            #+#    #+#             */
+/*   Updated: 2025/09/06 19:56:37 by alermi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// main.cpp
-#include "PhoneBook.hpp"
+#include "Phonebook.hpp"
+#include "Contact.hpp"
 #include <iostream>
-#include <sstream>
-#include <string>
+#include <cstdlib>
+#include <string.h>
 
-int	main()
+int controller(const std::string &input, const std::string &type)
 {
-	
-	PhoneBook phonebook;
-	std::string command;
+    if (input.length() != type.length())
+        return (0);
 
-	std::cout << "📞 80'ler Tarzı Telefon Rehberi'ne Hoşgeldin!\n";
+    for (size_t i = 0; i < input.length(); i++)
+    {
+        if (std::tolower(input[i]) != std::tolower(type[i]))
+            return (0);
+    }
+    return (1);
+}
 
-	while (true) {
-		std::cout << "\nKomut gir (ADD, SEARCH, EXIT): ";
-		std::getline(std::cin, command);
+std::string getInput(std::string outputText)
+{
+	std::string input;
 
-		if (command == "ADD")
-			phonebook.addContact();
-		else if (command == "SEARCH") {
-		    phonebook.searchContacts();
-				
-		    std::cout << "Detayını görmek istediğin indeks: ";
-		    std::string input;
-		    std::getline(std::cin, input);
-		    int index = -1;
-				
-		    std::stringstream ss(input);
-		    if (!(ss >> index)) {
-		        std::cout << "❌ Geçerli bir sayı girin!\n";
-		        continue;
-		    }
-		    phonebook.showContactDetails(index);
-		}
-		else if (command == "EXIT") {
-			std::cout << "Görüşmek üzere! 👋\n";
+	std::cout << std::endl;
+	std::cout << outputText;
+	while (1)
+	{
+		std::getline(std::cin, input);
+		if (std::cin.eof())
 			break;
+		if (!input.empty())
+			break ;
+	}
+	return (input);
+}
+
+Contact createContact()
+{
+	Contact newContact;
+	std::string input;
+
+	newContact.setFirstName(getInput("Enter First Name:"));
+	newContact.setLastName(getInput("Enter Last Name:"));
+	newContact.setNickName(getInput("Enter Nickname: "));
+	newContact.setPhoneNumber(getInput("Enter Phone Number: "));
+	newContact.setDarkestSecret(getInput("Enter Darkest Secret: "));
+	return (newContact);
+}
+
+void	printMonitor(void)
+{
+	std::cout << "PLEASE SELECT AND OPTION" << std::endl << "-----------------------------" << std::endl;
+	std::cout << "-> (ADD) : To add a new contact" << std::endl;
+	std::cout << "-> (SEARCH) : To search for a contact" << std::endl;
+	std::cout << "-> (EXIT) : To exit the application" << std::endl << "-----------------------------" << std::endl;
+}
+
+int	main(void)
+{
+	Phonebook	phonebook;
+	Contact		contact;
+	std::string	input;
+
+	std::system("clear");
+	std::cout << "Welcome to the Phonebook App" << std::endl;
+	while (1)
+	{
+		printMonitor();
+		std::getline(std::cin, input);
+		if (std::cin.eof())
+		{
+			std::cout << "EOF detected" << std::endl;
+			break ;
 		}
+		if (controller(input, "ADD"))
+		{
+			phonebook.addContact(createContact());
+			std::cout << "" << std::endl;
+			std::system("clear");
+			phonebook.displayContacts();
+		}
+		else if (controller(input, "SEARCH"))
+		{
+				phonebook.searchContact();
+				std::cout << "" << std::endl;
+		}
+		else if (controller(input, "EXIT"))
+			break ;
 		else {
-			std::cout << "Bilinmeyen komut. Sadece ADD, SEARCH, EXIT geçerli.\n";
+			
+			std::system("clear");
+			phonebook.displayContacts();
+			std::cout << "Invalid option. Please try again." << std::endl << std::endl;
 		}
 	}
+	std::cout << "Exiting the Phonebook App. Thank for using" << std::endl;
 	return (0);
 }
