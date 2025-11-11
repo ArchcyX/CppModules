@@ -30,18 +30,42 @@ std::string getInput(const std::string &consoleMessage)
 	return input;
 }
 
-int	replaceFile(std::string fileName, std::string strSrc, std::string strDst)
+std::string changeWord(std::string src, std::string target, std::string replace)
 {
-	std::ifstream fileSrc(fileName);
-	std::fstream fileDst(fileName + ".replace", std::ios::out);
+    std::string dst;
+    size_t		pos;
+    size_t		found;
 
-	if (fileSrc.is_open(fileName) || !fileDst)
-	{
-		std::cout << "Error File Not Created" << std::endl;
-		return (0);
-	}
-	return (1);
+	pos = 0;
+    while ((found = src.find(target, pos)) != std::string::npos)
+    {
+        dst.append(src, pos, found - pos);
+        dst += replace;
+        pos = found + target.length();
+    }
+    dst.append(src, pos, src.length() - pos);
+    return (dst);
 }
+
+int replaceFile(std::string fileName, std::string strSrc, std::string strDst)
+{
+	std::string		line;
+    std::ifstream	fileSrc(fileName);
+    std::ofstream	fileDst(fileName + ".replace");
+
+    if (!fileSrc.is_open() || !fileDst.is_open())
+    {
+        std::cout << "Error File Not Created" << std::endl;
+        return (0);
+    }
+	while (getline(fileSrc, line))
+	{
+		line = changeWord(line, strSrc, strDst);
+		fileDst << line << std::endl;
+	}
+    return (1);
+}
+
 
 int main(void)
 {
