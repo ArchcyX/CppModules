@@ -6,7 +6,7 @@
 /*   By: alermi <alermi@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 20:57:53 by alermi            #+#    #+#             */
-/*   Updated: 2026/01/11 21:33:32 by alermi           ###   ########.fr       */
+/*   Updated: 2026/01/11 21:47:35 by alermi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,44 @@ ClapTrap ClapTrap::operator=(const ClapTrap& other)
 
 void	ClapTrap::attack(const std::string& target)
 {
-	std::cout << this->_name << "by attacked the" << target << std::endl;
+	if (_hitPoints == 0 || _energyPoints == 0)
+	{
+		std::cout << "ClapTrap" << _name << "is death or has no energy cannot attack" << std::endl;
+		return ;
+	}
+	_energyPoints--;
+	std::cout << this->_name << "by attacked the" << target << _attackDamage << "point of damage" << std::endl;
 }
 
-void	ClapTrap::takeDamage(unsigned int value)
+void ClapTrap::takeDamage(unsigned int value)
 {
-	std::cout << "Take a damage" << value << ": hit points" << std::endl;
+    if (_hitPoints == 0)
+    {
+        std::cout << "ClapTrap " << _name << " is already dead!" << std::endl;
+        return;
+    }
+    if (value >= _hitPoints)
+        _hitPoints = 0;
+    else
+        _hitPoints -= value;
+    std::cout << "ClapTrap " << _name << " takes " << value 
+              << " points of damage! HP: " << _hitPoints << std::endl;
 }
 
-void	ClapTrap::beRepaired(unsigned int value)
+void ClapTrap::beRepaired(unsigned int value)
 {
-	std::cout << "Character use a repaired" << value << ": heal points";
+    if (_hitPoints == 0)
+    {
+        std::cout << "ClapTrap " << _name << " is dead and cannot repair!" << std::endl;
+        return;
+    }
+    if (_energyPoints == 0)
+    {
+        std::cout << "ClapTrap " << _name << " has no energy to repair!" << std::endl;
+        return;
+    }
+    _energyPoints--;
+    _hitPoints += value;
+    std::cout << "ClapTrap " << _name << " repairs itself, gaining " << value 
+              << " hit points! HP: " << _hitPoints << std::endl;
 }
