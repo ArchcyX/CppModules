@@ -6,7 +6,7 @@
 /*   By: alermi <alermi@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 20:57:46 by alermi            #+#    #+#             */
-/*   Updated: 2026/01/11 21:07:30 by alermi           ###   ########.fr       */
+/*   Updated: 2026/01/11 21:23:14 by alermi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ class ClapTrap
 			ClapTrap &operator=(const ClapTrap &other);
 
 			void	attack(const std::string &target);
-			void	takeDamage(unsigned int amount);
-			void	beRepaired(unsigned int amount);
+			void	takeDamage(unsigned int value);
+			void	beRepaired(unsigned int value);
 };
 
 #endif
