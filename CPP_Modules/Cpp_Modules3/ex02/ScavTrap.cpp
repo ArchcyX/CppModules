@@ -6,7 +6,7 @@
 /*   By: alermi <alermi@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 20:27:52 by alermi            #+#    #+#             */
-/*   Updated: 2026/01/12 20:27:53 by alermi           ###   ########.fr       */
+/*   Updated: 2026/01/16 16:04:51 by alermi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,7 @@ ScavTrap &ScavTrap::operator=(const ScavTrap &other)
 {
 	std::cout << "ScavTrap Copy Assignment Operator Called" << std::endl;
 	if (this != &other)
-	{
 		ClapTrap::operator=(other);
-	}
 	return (*this);
 }
 
