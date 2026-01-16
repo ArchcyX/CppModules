@@ -6,7 +6,7 @@
 /*   By: alermi <alermi@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 20:27:48 by alermi            #+#    #+#             */
-/*   Updated: 2026/01/12 20:27:49 by alermi           ###   ########.fr       */
+/*   Updated: 2026/01/16 16:09:55 by alermi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 class ScavTrap : public ClapTrap
 {
 	public:
+		
 		//################[Orthodox Cannonical Form]################//	
 		ScavTrap();
 		~ScavTrap();
