@@ -13,47 +13,52 @@
 #include "ClapTrap.hpp"
 #include "ScavTrap.hpp"
 
+void	clapOutputPrinter(void)
+{
+	ClapTrap	clapbot("Clapbot-07");
+	ClapTrap	testbot;
+
+	std::cout << "\n=======[War Simulation Datas]=======\n" << std::endl;
+	std::cout << "\n" << "Robot Name: " << clapbot.getName() << std::endl;
+	std::cout << "Hit Points: " << clapbot.getHitpoints() << std::endl;
+	std::cout << "Energy Points: " << clapbot.getEnergyPoints() << std::endl;
+	std::cout << "Attack Damage: " << clapbot.getAttackDamage() << std::endl;
+	std::cout << "\n====================================\n" << std::endl;
+
+	clapbot.attack("TestBot");
+	testbot.takeDamage(10);
+	testbot.beRepaired(2);
+
+	std::cout << "\n=======[War Simulation Datas]=======\n" << std::endl;
+	std::cout << "\n" << "Robot Name: " << testbot.getName() << std::endl;
+	std::cout << "Hit Points: " << testbot.getHitpoints() << std::endl;
+	std::cout << "Energy Points: " << testbot.getEnergyPoints() << std::endl;
+	std::cout << "Attack Damage: " << testbot.getAttackDamage() << std::endl;
+	std::cout << "\n====================================\n" << std::endl;
+}
+
+void	simPrinter(ScavTrap& scavbot)
+{
+	std::cout << "\n" << "Robot Name: " << scavbot.getName() << std::endl;
+	std::cout << "Hit Points: " << scavbot.getHitpoints() << std::endl;
+	std::cout << "Energy Points: " << scavbot.getEnergyPoints() << std::endl;
+	std::cout << "Attack Damage: " << scavbot.getAttackDamage() << std::endl;
+	std::cout << "\n=========================================================\n" << std::endl;
+}
+
 int	main(void)
 {
-	std::cout << "\n=== ClapTrap Tests ===" << std::endl;
-	ClapTrap	clap("Clappy");
-	clap.attack("target");
-	clap.takeDamage(5);
-	clap.beRepaired(3);
+	ClapTrap	clapbot("Clapbot-07");
+	ScavTrap	scavbot("Scavbot-09");
 
-	std::cout << "\n=== ScavTrap Basic Tests ===" << std::endl;
-	ScavTrap	scav("Scavvy");
-	scav.attack("enemy");
-	scav.takeDamage(30);
-	scav.beRepaired(20);
-	scav.guardGate();
+	clapOutputPrinter();
+	std::cout << "===================[ScavTrap Simulation]==================\n" << std::endl;
+	simPrinter(scavbot);
+	scavbot.attack("Clapbot-07");
+	scavbot.takeDamage(20);
+	scavbot.beRepaired(10);
+	simPrinter(scavbot);
+	scavbot.guardGate();
 
-	std::cout << "\n=== ScavTrap Energy Depletion Test ===" << std::endl;
-	ScavTrap	energyTest("EnergyScav");
-	for (int i = 0; i < 52; i++)
-	{
-		if (i % 10 == 0)
-			std::cout << "Action " << i + 1 << ": ";
-		energyTest.attack("Target");
-	}
-
-	std::cout << "\n=== ScavTrap Death Scenario Test ===" << std::endl;
-	ScavTrap	deathTest("DeathScav");
-	deathTest.takeDamage(100);
-	deathTest.attack("Target");
-	deathTest.beRepaired(10);
-	deathTest.guardGate();
-
-	std::cout << "\n=== Copy Constructor Test ===" << std::endl;
-	ScavTrap	original("Original");
-	ScavTrap	copy(original);
-	copy.attack("Target");
-
-	std::cout << "\n=== Assignment Operator Test ===" << std::endl;
-	ScavTrap	assigned("Assigned");
-	assigned = original;
-	assigned.attack("Enemy");
-
-	std::cout << "\n=== Destructor Chain ===" << std::endl;
 	return (0);
 }
