@@ -101,3 +101,14 @@ void ClapTrap::beRepaired(unsigned int value)
     std::cout << "ClapTrap " << _name << " repairs itself, gaining " << value 
               << " hit points! HP: " << _hitPoints << std::endl;
 }
+
+void			setName(const std::string name);
+void			setHitPoints(const unsigned int hitPoints);
+void			setEnergyPoints(const unsigned int energyPoints);
+void			SetAttackDamage(const unsigned int attackDamage);
+
+std::string		ClapTrap::getName() const { return (this->_name);};
+
+unsigned int	ClassTrap::getHitpoints() const {return (this->_hitPoints);};
+unsigned int	getEnergyPoints() {};
+unsigned int	getAttackDamage() {};
