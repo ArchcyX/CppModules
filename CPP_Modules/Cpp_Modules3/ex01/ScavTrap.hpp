@@ -18,11 +18,14 @@
 class ScavTrap : public ClapTrap
 {
 	public:
+		//################[Orthodox Cannonical Form]################//	
 		ScavTrap();
 		~ScavTrap();
 		ScavTrap(std::string name);
 		ScavTrap(const ScavTrap &variant);
 		ScavTrap &operator=(const ScavTrap &other);
+
+		//################[ScavTrap Methods]################//	
 		void attack(const std::string& target);
 		void guardGate();
 };
