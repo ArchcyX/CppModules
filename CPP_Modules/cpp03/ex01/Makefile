@@ -12,7 +12,7 @@
 # ============================================================
 #                       PROJECT CONFIG
 # ============================================================
-NAME    = ClapTrap
+NAME    = ScavTrap
 CXX     = c++
 CXXFLAGS  = -Wall -Wextra -Werror -g -std=c++98
 
@@ -20,7 +20,8 @@ CXXFLAGS  = -Wall -Wextra -Werror -g -std=c++98
 #                       SOURCE FILES
 # ============================================================
 SRC     = main.cpp \
-          ClapTrap.cpp
+          ClapTrap.cpp \
+          ScavTrap.cpp
 
 OBJS    = $(SRC:.cpp=.o)
 
@@ -38,7 +39,7 @@ $(NAME): $(OBJS)
 # ============================================================
 #                 OBJECT FILE COMPILATION RULE
 # ============================================================
-%.o: %.cpp ClapTrap.hpp
+%.o: %.cpp ClapTrap.hpp ScavTrap.hpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 # ============================================================

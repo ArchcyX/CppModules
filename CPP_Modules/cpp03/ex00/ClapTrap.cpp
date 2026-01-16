@@ -14,14 +14,17 @@
 
 ClapTrap::ClapTrap()
 {		
-	std::cout << "Default Constrcutor Called" << std::endl;
+	std::cout << "Default Constructor Called" << std::endl;
 
 	this->_name = "Default";
+	this->_hitPoints = 10;
+	this->_energyPoints = 10;
+	this->_attackDamage = 0;
 }
 
 ClapTrap::ClapTrap(std::string name)
 {
-	std::cout << "Constrcutor Called" << std::endl;
+	std::cout << "Constructor Called" << std::endl;
 	this->_name = name;
 	this->_hitPoints = 10;
 	this->_energyPoints = 10;
@@ -35,23 +38,35 @@ ClapTrap::~ClapTrap()
 
 ClapTrap::ClapTrap(const ClapTrap &variant)
 {
-
+	std::cout << "Copy Constructor Called" << std::endl;
+	this->_name = variant._name;
+	this->_hitPoints = variant._hitPoints;
+	this->_energyPoints = variant._energyPoints;
+	this->_attackDamage = variant._attackDamage;
 }
 
-ClapTrap ClapTrap::operator=(const ClapTrap& other)
+ClapTrap &ClapTrap::operator=(const ClapTrap& other)
 {
-	return (other);
+	std::cout << "Copy Assignment Operator Called" << std::endl;
+	if (this != &other)
+	{
+		this->_name = other._name;
+		this->_hitPoints = other._hitPoints;
+		this->_energyPoints = other._energyPoints;
+		this->_attackDamage = other._attackDamage;
+	}
+	return (*this);
 }
 
 void	ClapTrap::attack(const std::string& target)
 {
 	if (_hitPoints == 0 || _energyPoints == 0)
 	{
-		std::cout << "ClapTrap" << _name << "is death or has no energy cannot attack" << std::endl;
+		std::cout << "ClapTrap " << _name << " is dead or has no energy, cannot attack!" << std::endl;
 		return ;
 	}
 	_energyPoints--;
-	std::cout << this->_name << "by attacked the" << target << _attackDamage << "point of damage" << std::endl;
+	std::cout << "ClapTrap " << this->_name << " attacks " << target << ", causing " << _attackDamage << " points of damage!" << std::endl;
 }
 
 void ClapTrap::takeDamage(unsigned int value)
