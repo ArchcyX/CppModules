@@ -6,7 +6,7 @@
 /*   By: alermi <alermi@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 20:57:46 by alermi            #+#    #+#             */
-/*   Updated: 2026/01/11 21:23:14 by alermi           ###   ########.fr       */
+/*   Updated: 2026/01/16 16:30:06 by alermi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ class ClapTrap
 			unsigned int	_energyPoints;
 			unsigned int	_attackDamage;
 	public:
-			//###########[Orthodox Cannonical Form]##############//
 			ClapTrap();
 			virtual ~ClapTrap();
 			ClapTrap(std::string name);
