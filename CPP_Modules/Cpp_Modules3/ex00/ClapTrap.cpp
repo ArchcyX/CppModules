@@ -6,7 +6,7 @@
 /*   By: alermi <alermi@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 20:57:53 by alermi            #+#    #+#             */
-/*   Updated: 2026/01/16 16:26:41 by alermi           ###   ########.fr       */
+/*   Updated: 2026/01/16 17:29:43 by alermi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 ClapTrap::ClapTrap()
 {		
-	this->_name = "Default";
+	this->_name = "TestBot";
 	this->_hitPoints = 10;
 	this->_energyPoints = 10;
 	this->_attackDamage = 0;
