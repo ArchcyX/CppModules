@@ -31,9 +31,21 @@ class ClapTrap
 			ClapTrap(const ClapTrap &variant);
 			ClapTrap &operator=(const ClapTrap &other);
 
-			void	attack(const std::string &target);
-			void	takeDamage(unsigned int value);
-			void	beRepaired(unsigned int value);
+			//################[ClapTrap METHODS]################//
+			void		attack(const std::string &target);
+			void		takeDamage(unsigned int value);
+			void		beRepaired(unsigned int value);
+
+			//################[SETTERS & GETTERS]################//			
+			void			setName(const std::string name);
+			void			setHitPoints(const unsigned int hitPoints);
+			void			setEnergyPoints(const unsigned int energyPoints);
+			void			SetAttackDamage(const unsigned int attackDamage);
+
+			std::string		getName()			const;
+			unsigned int	getHitpoints()		const;
+			unsigned int	getEnergyPoints()	const;
+			unsigned int	getAttackDamage()	const;
 };
 
 #endif
