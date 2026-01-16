@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alermi <alermi@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/16 15:07:40 by alermi            #+#    #+#             */
-/*   Updated: 2026/01/16 15:07:40 by alermi           ###   ########.fr       */
+/*   Created: 2026/01/12 20:27:48 by alermi            #+#    #+#             */
+/*   Updated: 2026/01/12 20:27:49 by alermi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef SCAVTRAP_HPP
+# define SCAVTRAP_HPP
+
 #include "ClapTrap.hpp"
-#include "FragTrap.hpp"
-#include "ScavTrap.hpp"
 
-int	main(void)
+class ScavTrap : public ClapTrap
 {
-	ClapTrap	clapbot("Clapbot-07");
-	//ScavTrap	scavbot("Scavbot-08");
-	FragTrap	fragbot("Fragbot-09");
+	public:
+		//################[Orthodox Cannonical Form]################//	
+		ScavTrap();
+		~ScavTrap();
+		ScavTrap(std::string name);
+		ScavTrap(const ScavTrap &variant);
+		ScavTrap &operator=(const ScavTrap &other);
 
-	clapbot.attack("Scavbot-08");
-	//scavbot.takeDamage(clapbot.getAttackDamage());
-	//scavbot.beRepaired(scavbot.getEnergyPoints() / 2);
-	fragbot.highFivesGuys();
-	return (0);
-}
+		//################[ScavTrap Methods]################//	
+		void attack(const std::string& target);
+		void guardGate();
+};
+
+#endif
