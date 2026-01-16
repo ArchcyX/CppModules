@@ -14,18 +14,18 @@
 
 ScavTrap::ScavTrap() : ClapTrap()
 {
-	std::cout << "ScavTrap Default Constructor Called" << std::endl;
 	this->_hitPoints = 100;
 	this->_energyPoints = 50;
 	this->_attackDamage = 20;
+	std::cout << "ScavTrap " << _name << " has been assembled!" << std::endl;
 }
 
 ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
 {
-	std::cout << "ScavTrap Constructor Called" << std::endl;
 	this->_hitPoints = 100;
 	this->_energyPoints = 50;
 	this->_attackDamage = 20;
+	std::cout << "ScavTrap " << _name << " has been assembled!" << std::endl;
 }
 
 ScavTrap::ScavTrap(const ScavTrap &variant) : ClapTrap(variant)
@@ -45,7 +45,7 @@ ScavTrap &ScavTrap::operator=(const ScavTrap &other)
 
 ScavTrap::~ScavTrap()
 {
-	std::cout << "ScavTrap Destructor Called" << std::endl;
+	std::cout << "ScavTrap " << _name << " has been disassembled!" << std::endl;
 }
 
 void ScavTrap::attack(const std::string& target)
@@ -56,11 +56,11 @@ void ScavTrap::attack(const std::string& target)
 		return ;
 	}
 	_energyPoints--;
-	std::cout << "ScavTrap " << this->_name << " attacks " << target 
-	          << ", causing " << _attackDamage << " points of damage!" << std::endl;
+	std::cout << "ScavTrap " << this->_name << " ferociously attacks " << target 
+	          << ", dealing " << _attackDamage << " points of damage!" << std::endl;
 }
 
 void ScavTrap::guardGate()
 {
-	std::cout << "ScavTrap is now in Gate keeper mode" << std::endl;
+	std::cout << "ScavTrap " << _name << " is now in Gate keeper mode!" << std::endl;
 }

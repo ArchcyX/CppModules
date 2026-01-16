@@ -5,13 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: alermi <alermi@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/12 21:36:00 by alermi            #+#    #+#             */
-/*   Updated: 2026/01/12 21:36:00 by alermi           ###   ########.fr       */
+/*   Created: 2026/01/16 15:07:40 by alermi            #+#    #+#             */
+/*   Updated: 2026/01/16 15:07:40 by alermi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
-#include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 
 int	main(void)
 {
@@ -21,38 +21,45 @@ int	main(void)
 	clap.takeDamage(5);
 	clap.beRepaired(3);
 
-	std::cout << "\n=== ScavTrap Basic Tests ===" << std::endl;
-	ScavTrap	scav("Scavvy");
-	scav.attack("enemy");
-	scav.takeDamage(30);
-	scav.beRepaired(20);
-	scav.guardGate();
+	std::cout << "\n=== FragTrap Basic Tests ===" << std::endl;
+	FragTrap	frag("Fraggy");
+	frag.attack("enemy");
+	frag.takeDamage(40);
+	frag.beRepaired(25);
+	frag.highFivesGuys();
 
-	std::cout << "\n=== ScavTrap Energy Depletion Test ===" << std::endl;
-	ScavTrap	energyTest("EnergyScav");
-	for (int i = 0; i < 52; i++)
+	std::cout << "\n=== FragTrap Energy Depletion Test ===" << std::endl;
+	FragTrap	energyTest("EnergyFrag");
+	for (int i = 0; i < 102; i++)
 	{
-		if (i % 10 == 0)
+		if (i % 20 == 0)
 			std::cout << "Action " << i + 1 << ": ";
 		energyTest.attack("Target");
 	}
 
-	std::cout << "\n=== ScavTrap Death Scenario Test ===" << std::endl;
-	ScavTrap	deathTest("DeathScav");
+	std::cout << "\n=== FragTrap Death Scenario Test ===" << std::endl;
+	FragTrap	deathTest("DeathFrag");
 	deathTest.takeDamage(100);
 	deathTest.attack("Target");
 	deathTest.beRepaired(10);
-	deathTest.guardGate();
+	deathTest.highFivesGuys();
 
 	std::cout << "\n=== Copy Constructor Test ===" << std::endl;
-	ScavTrap	original("Original");
-	ScavTrap	copy(original);
+	FragTrap	original("Original");
+	FragTrap	copy(original);
 	copy.attack("Target");
+	copy.highFivesGuys();
 
 	std::cout << "\n=== Assignment Operator Test ===" << std::endl;
-	ScavTrap	assigned("Assigned");
+	FragTrap	assigned("Assigned");
 	assigned = original;
 	assigned.attack("Enemy");
+	assigned.highFivesGuys();
+
+	std::cout << "\n=== Construction/Destruction Chain Test ===" << std::endl;
+	{
+		FragTrap	chainTest("ChainTest");
+	}
 
 	std::cout << "\n=== Destructor Chain ===" << std::endl;
 	return (0);
