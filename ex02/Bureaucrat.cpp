@@ -23,9 +23,9 @@ Bureaucrat::Bureaucrat(const std::string& name, int grade) : _name(name)
 {
 	std::cout << "\n\nBureaucrat Constructor Called\n\n" << std::endl;
 	if (grade < 1)
-		throw Bureaucrat::GradeTooHighException();
+		throw Bureaucrat::GradeTooHighException(this->_name);
 	else if (grade > 150)
-		throw Bureaucrat::GradeTooLowException();
+		throw Bureaucrat::GradeTooLowException(this->_name);
 	else
 	 	_grade = grade;
 }
@@ -86,20 +86,15 @@ std::ostream& operator<<(std::ostream& os, const Bureaucrat& bureaucrat)
 }
 
 
-const char	*Bureaucrat::GradeTooHighException::what() const throw()
+
+//-------------------------------------------------------------------------------
+//					     	GRADE TOO LOW EXCEPTION OCF
+//-------------------------------------------------------------------------------
+
+
+Bureaucrat::GradeTooHighException::GradeTooHighException() : _personName("default person")
 {
-	return ("Grade is too high!");
-}
-
-
-const char	*Bureaucrat::GradeTooLowException::what() const throw()
-{
-	return ("Grade is too low!");
-}
-
-Bureaucrat::GradeTooHighException::GradeTooHighException() : _personName("default")
-{
-
+	std::cout << "Default Constructor Called" << std::endl;
 }
 
 Bureaucrat::GradeTooHighException::~GradeTooHighException() throw()
@@ -107,14 +102,72 @@ Bureaucrat::GradeTooHighException::~GradeTooHighException() throw()
 	std::cout << "Grade Too High Destructor Called" << std::endl;
 }
 
-Bureaucrat::GradeTooLowException::GradeTooLowException() : _personName("default")
+Bureaucrat::GradeTooHighException::GradeTooHighException(const std::string bureaucrat)
 {
-
+	std::cout << "Constructor Called" << std::endl;
+	this->_personName = "Error: Bureaucrat > " + bureaucrat + "grade is TOO HIGH";
 }
 
 
+Bureaucrat::GradeTooHighException::GradeTooHighException(const GradeTooHighException& variant)
+{
+	this->_personName = variant._personName;
+}
+
+Bureaucrat::GradeTooHighException& Bureaucrat::GradeTooHighException::operator=(const GradeTooHighException& other) {
+    if (this != &other)
+        this->_personName = other._personName;
+
+    return *this;
+}
+
+//-------------------------------------------------------------------------------
+//					     	GRADE TOO LOW EXCEPTION OCF
+//-------------------------------------------------------------------------------
+
+
+Bureaucrat::GradeTooLowException::GradeTooLowException() : _personName("default")
+{
+	std::cout << "Default Constructor Called" << std::endl;
+}
+
+Bureaucrat::GradeTooLowException::GradeTooLowException(const std::string bureaucrat)
+{
+	std::cout << "Default Constructor Called" << std::endl;
+	this->_personName = "Error: Bureaucrat > " + bureaucrat + "grade is TOO LOW";
+}
 
 Bureaucrat::GradeTooLowException::~GradeTooLowException() throw()
 {
 	std::cout << "Grade Too Low Destructor Called" << std::endl;
 }
+
+Bureaucrat::GradeTooLowException::GradeTooLowException(const GradeTooLowException& variant)
+{
+	this->_personName = variant._personName;
+}
+
+Bureaucrat::GradeTooLowException& Bureaucrat::GradeTooLowException::operator=(const GradeTooLowException& other)
+{
+    if (this != &other)
+        this->_personName = other._personName;
+
+    return *this;
+}
+
+//-------------------------------------------------------------------------------
+//					     		EXCEPTION METHODS
+//-------------------------------------------------------------------------------
+
+
+const char	*Bureaucrat::GradeTooHighException::what() const throw()
+{
+	return (this->_personName.c_str());
+}
+
+const char	*Bureaucrat::GradeTooLowException::what() const throw()
+{
+	return (this->_personName.c_str());
+}
+
+
