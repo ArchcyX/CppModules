@@ -34,11 +34,11 @@ int	main(void)
 	catch (const std::bad_alloc& e)
 	{
 		std::cerr << "Error No Memory Left on Proccess hehe:))" << std::endl;
-		return (1);
+		
 	}
 	catch (const std::exception& e)
 	{
-		std::cerr << "Unexpected situation" << e.what() << std::endl;
+		std::cerr << "Unexpected situation " << e.what() << std::endl;
 	}
 
 	return (0);
