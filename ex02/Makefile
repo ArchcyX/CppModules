@@ -13,11 +13,11 @@
 # ============================================================
 #                       COLOR CODES
 # ============================================================
-GREEN		= \033[1;32m
-YELLOW		= \033[1;33m
-RED			= \033[1;31m
-CYAN		= \033[1;36m
-RESET		= \033[0m
+GREEN        = \033[1;32m
+YELLOW       = \033[1;33m
+RED          = \033[1;31m
+CYAN         = \033[1;36m
+RESET        = \033[0m
 
 # ============================================================
 #                       PROJECT CONFIG
@@ -29,12 +29,18 @@ CXXFLAGS    = -Wall -Wextra -Werror -g -std=c++98
 # ============================================================
 #                       SOURCE & HEADER FILES
 # ============================================================
-HEADERS     = Bureaucrat.hpp	\
-			  Form.hpp
+HEADERS     = Bureaucrat.hpp              \
+              AForm.hpp                   \
+              ShrubberyCreationForm.hpp   \
+              RobotomyRequestForm.hpp     \
+              PresidentialPardonForm.hpp
 
-SRC         = main.cpp 			\
-              Bureaucrat.cpp	\
-			  Form.cpp
+SRC         = main.cpp                    \
+              Bureaucrat.cpp              \
+              AForm.cpp                   \
+              ShrubberyCreationForm.cpp   \
+              RobotomyRequestForm.cpp     \
+              PresidentialPardonForm.cpp
 
 OBJS        = $(SRC:.cpp=.o)
 
@@ -87,14 +93,13 @@ runv: all
 help:
 	@echo ""
 	@echo "$(CYAN)====================  MAKE HELP  ====================$(RESET)"
-	@echo " $(GREEN)make$(RESET)          → Programı derle"
-	@echo " $(YELLOW)make clean$(RESET)    → Objeleri sil"
-	@echo " $(RED)make fclean$(RESET)   → Objeleri ve executable'ı sil"
-	@echo " $(CYAN)make re$(RESET)       → Baştan derle"
-	@echo " $(GREEN)make run$(RESET)      → Programı çalıştır"
-	@echo " $(YELLOW)make runv$(RESET)     → Valgrind ile çalıştır"
+	@echo " $(GREEN)make$(RESET)         → Programı derle"
+	@echo " $(YELLOW)make clean$(RESET)   → Objeleri sil"
+	@echo " $(RED)make fclean$(RESET)  → Objeleri ve executable'ı sil"
+	@echo " $(CYAN)make re$(RESET)      → Baştan derle"
+	@echo " $(GREEN)make run$(RESET)     → Programı çalıştır"
+	@echo " $(YELLOW)make runv$(RESET)    → Valgrind ile çalıştır"
 	@echo "$(CYAN)====================================================$(RESET)"
 	@echo ""
 
 .PHONY: all clean fclean re help run runv
-
