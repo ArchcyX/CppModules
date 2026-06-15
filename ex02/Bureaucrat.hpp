@@ -25,15 +25,23 @@ class Bureaucrat
         // -------------------------------------------------------
         // Exceptions
         // -------------------------------------------------------
-        class GradeTooHighException : public std::exception {
+        class GradeTooHighException : public std::exception
+		{
             public:
+				GradeTooHighException(const std::string& errorName);
                 virtual const char* what() const throw();
-        };
+        	private:
+				std::string	_errorName;
+		};
         
-        class GradeTooLowException : public std::exception {
+        class GradeTooLowException : public std::exception
+		{
             public:
+				GradeTooLowException(const std::string& errorName);
                 virtual const char* what() const throw();
-        };
+        	private:
+				std::string	_errorName;
+		};
 
         // -------------------------------------------------------
         // Constructors & Destructor (OCF & Custom)

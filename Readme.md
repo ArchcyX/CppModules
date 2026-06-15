@@ -2,6 +2,8 @@
 
 - 1) try cath yapısı öncelikli olarak runtime sürecinde kullanılan bir mekanizmadır 
 
+- 2) Nested Class Java vb bazı dillerde dışarıda bulunan class içeride ki class'ı bir pointer aracılığı ile kurar
+
 
 
 

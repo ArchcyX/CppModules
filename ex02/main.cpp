@@ -28,7 +28,7 @@ int	main(void)
 
 	try 
 	{
-		Bureaucrat	gavernorError(hugeName, 200);
+		Bureaucrat	gavernorError(hugeName, 150);
 		std::cout << "Success Governor Constructor Called" << std::endl; 
 	} 
 	catch (const std::bad_alloc& e)
