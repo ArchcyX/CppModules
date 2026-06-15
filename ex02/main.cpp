@@ -29,6 +29,7 @@ int	main(void)
 	try 
 	{
 		Bureaucrat	gavernorError(hugeName, 150);
+		Bureaucrat	gavernor2("Deneme", 100);
 		std::cout << "Success Governor Constructor Called" << std::endl; 
 	} 
 	catch (const std::bad_alloc& e)
@@ -40,6 +41,6 @@ int	main(void)
 	{
 		std::cerr << "Unexpected situation " << e.what() << std::endl;
 	}
-
+	std::cout << "selamlar" << std::endl;
 	return (0);
 }

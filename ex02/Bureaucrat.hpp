@@ -28,19 +28,40 @@ class Bureaucrat
         class GradeTooHighException : public std::exception
 		{
             public:
-				GradeTooHighException(const std::string& errorName);
+				//------------------------------------------------
+				//				  ORTHODOX CANNOCICAL FORM METHODS
+				//------------------------------------------------
+				GradeTooHighException();
+				GradeTooHighException(const std::string bureaucrat);
+				GradeTooHighException(const GradeTooHighException& variant);
+				GradeTooHighException&	operator=(const GradeTooHighException& other);
+				virtual ~GradeTooHighException() throw();
+				//------------------------------------------------
+				//								 EXCEPTION METHODS
+				//------------------------------------------------
                 virtual const char* what() const throw();
-        	private:
-				std::string	_errorName;
+
+			private:
+				std::string	_personName;
 		};
         
         class GradeTooLowException : public std::exception
 		{
             public:
-				GradeTooLowException(const std::string& errorName);
-                virtual const char* what() const throw();
-        	private:
-				std::string	_errorName;
+				//------------------------------------------------
+				//				  ORTHODOX CANNOCICAL FORM METHODS
+				//------------------------------------------------
+				GradeTooLowException();
+				virtual ~GradeTooLowException() throw();
+				GradeTooLowException(const std::string bureaucrat);
+				GradeTooLowException(const GradeTooLowException& variant);
+				GradeTooLowException& operator=(const GradeTooLowException& other);
+				//------------------------------------------------
+				//								 EXCEPTION METHODS
+				//------------------------------------------------
+				virtual const char* what() const throw();
+			private:
+				std::string	_personName;
 		};
 
         // -------------------------------------------------------

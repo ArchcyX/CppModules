@@ -69,8 +69,6 @@ void	Bureaucrat::incrementGrade()
 }
 
 
-
-
 void	Bureaucrat::decrementGrade()
 {
 	if (_grade + 1 > 150)
@@ -88,12 +86,10 @@ std::ostream& operator<<(std::ostream& os, const Bureaucrat& bureaucrat)
 }
 
 
-
 const char	*Bureaucrat::GradeTooHighException::what() const throw()
 {
 	return ("Grade is too high!");
 }
-
 
 
 const char	*Bureaucrat::GradeTooLowException::what() const throw()
@@ -101,3 +97,24 @@ const char	*Bureaucrat::GradeTooLowException::what() const throw()
 	return ("Grade is too low!");
 }
 
+Bureaucrat::GradeTooHighException::GradeTooHighException() : _personName("default")
+{
+
+}
+
+Bureaucrat::GradeTooHighException::~GradeTooHighException() throw()
+{
+	std::cout << "Grade Too High Destructor Called" << std::endl;
+}
+
+Bureaucrat::GradeTooLowException::GradeTooLowException() : _personName("default")
+{
+
+}
+
+
+
+Bureaucrat::GradeTooLowException::~GradeTooLowException() throw()
+{
+	std::cout << "Grade Too Low Destructor Called" << std::endl;
+}
