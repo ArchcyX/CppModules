@@ -29,6 +29,6 @@ class	RobotomyRequestForm : public AForm
 		std::string	_target;
 	
 	protected:
-		virtual	void	executionAction() const;
+		virtual	void	formExecuteAction() const;
 };
 

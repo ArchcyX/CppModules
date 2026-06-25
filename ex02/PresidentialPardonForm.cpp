@@ -55,7 +55,7 @@ PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPard
 }
 
 
-void	PresidentialPardonForm::executionAction() const
+void	PresidentialPardonForm::formexecuteaction() const
 {
 	std::cout << this->_target << " Pardon Form by Zaphod Beeblebrox." << std::endl;
 }

@@ -21,8 +21,6 @@
 #include "PresidentialPardonForm.hpp"
 
 // =========================================================================
-// Terminal Renk Kodları (Değerlendirme sırasında harika görünür)
-// =========================================================================
 #define RESET   "\033[0m"
 #define RED     "\033[31m"
 #define GREEN   "\033[32m"
@@ -49,13 +47,10 @@ int main(void)
     std::cout << CYAN << "             BUREAUCRACY SYSTEM INITIALIZED            " << RESET << std::endl;
     std::cout << CYAN << "=======================================================\n" << RESET << std::endl;
 
-    // =========================================================================
-    // TEST 1: SHRUBBERY CREATION FORM (Sign: 145, Exec: 137)
-    // =========================================================================
     std::cout << YELLOW << "\n--- TEST 1: Shrubbery Creation (Ağaç Dikme) ---" << RESET << std::endl;
     try 
     {
-        Bureaucrat gardener("Bahçıvan Ali", 130); // İmzalamaya ve yürütmeye yetkisi var
+        Bureaucrat gardener("Bahçıvan Ali", 130);
         ShrubberyCreationForm form1("Bahce");
 
         std::cout << form1 << std::endl;
@@ -67,31 +62,25 @@ int main(void)
         std::cerr << RED << "Hata: " << e.what() << RESET << std::endl;
     }
 
-    // =========================================================================
-    // TEST 2: ROBOTOMY REQUEST FORM (Sign: 72, Exec: 45)
-    // =========================================================================
     std::cout << YELLOW << "\n--- TEST 2: Robotomy Request (Matkap Sesi) ---" << RESET << std::endl;
     try 
     {
-        Bureaucrat mechanic("Mühendis Ayşe", 40); // İmzalamaya ve yürütmeye yetkisi var
+        Bureaucrat mechanic("Mühendis Ayşe", 40);
         RobotomyRequestForm form2("Bender");
 
         mechanic.signForm(form2);
-        mechanic.executeForm(form2); // %50 ihtimalle başarılı olur
-        mechanic.executeForm(form2); // Şansı görmek için bir kez daha deniyoruz
+        mechanic.executeForm(form2);
+        mechanic.executeForm(form2);
     }
     catch (const std::exception& e) 
     {
         std::cerr << RED << "Hata: " << e.what() << RESET << std::endl;
     }
 
-    // =========================================================================
-    // TEST 3: PRESIDENTIAL PARDON FORM (Sign: 25, Exec: 5)
-    // =========================================================================
     std::cout << YELLOW << "\n--- TEST 3: Presidential Pardon (Başkanlık Affı) ---" << RESET << std::endl;
     try 
     {
-        Bureaucrat boss("Başkan", 1); // Her şeye yetkisi var
+        Bureaucrat boss("Başkan", 1);
         PresidentialPardonForm form3("Arthur Dent");
 
         boss.signForm(form3);
