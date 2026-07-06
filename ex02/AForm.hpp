@@ -40,7 +40,7 @@ class	AForm
 		class	FormUnsignedException : public std::exception
 		{
 			public:
-				virtual const char* what() const throw();
+				virtual const char	*what() const throw();
 		};
 
 		//------------------------------------------------
@@ -56,8 +56,7 @@ class	AForm
 		// GENERAL MEMBER FUNCTION
 		//------------------------------------------------
 		void	beSigned(const Bureaucrat& person);
-		void	executionAction(const Bureaucrat& person);
-
+		void executionAction(const Bureaucrat& person) const;
 		//------------------------------------------------
 		// GETTER & INLINE
 		//------------------------------------------------
@@ -70,7 +69,7 @@ class	AForm
 		//ABSTRACT INITILIZER
 		//------------------------------------------------
 	protected:
-		virtual void	formExecuteAction() = 0;
+		virtual void	formExecuteAction() const = 0;
 
 	private:
 		const std::string	_name;

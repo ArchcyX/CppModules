@@ -12,8 +12,8 @@
 
 #include <iostream>
 #include <exception>
-#include <cstdlib> // exit() ve rand() için
-#include <ctime>   // time() için (Robotomy randomizer)
+#include <cstdlib>
+#include <ctime>
 
 #include "Bureaucrat.hpp"
 #include "ShrubberyCreationForm.hpp"
@@ -28,9 +28,6 @@
 #define CYAN    "\033[36m"
 #define MAGENTA "\033[35m"
 
-// =========================================================================
-// Özel Çöküş (Terminate) Yöneticisi
-// =========================================================================
 void    customTerminate()
 {
     std::cerr << RED << "\n[SİSTEM ÇÖKTÜ] Yakalanmayan bir hata (Uncaught Exception) fırlatıldı!" << RESET << std::endl;
@@ -102,7 +99,7 @@ int main(void)
 
         // 1. Durum: İmzasız formu yürütmeye çalışmak (Exception fırlatmalı)
         std::cout << MAGENTA << "[Deneme 1] İmzasız formu yürütmeye çalışma:" << RESET << std::endl;
-        intern.executionForm(form4);
+        intern.executeForm(form4); // DÜZELTİLDİ: executionForm -> executeForm
     }
     catch (const std::exception& e) 
     {
@@ -123,7 +120,7 @@ int main(void)
     }
 
     std::cout << GREEN << "\n=======================================================" << RESET << std::endl;
-    std::cout << GREEN << "          TÜM TESTLER BAŞARIYLA TAMAMLANDI!            " << RESET << std::endl;
+    std::cout << GREEN << "             TÜM TESTLER BAŞARIYLA TAMAMLANDI!             " << RESET << std::endl;
     std::cout << GREEN << "=======================================================\n" << RESET << std::endl;
 
     return (0);

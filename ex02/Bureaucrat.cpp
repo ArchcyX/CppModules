@@ -9,9 +9,12 @@
 /*   Updated: 2026/06/07 13:38:54 by alermi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "AForm.hpp"
 #include "Bureaucrat.hpp"
 #include <ostream>
 #include <string>
+
 
 Bureaucrat::Bureaucrat() : _name("Default Bureaucrat"), _grade(150)
 {
@@ -36,16 +39,12 @@ Bureaucrat::~Bureaucrat()
 }
 
 
-
-
 Bureaucrat::Bureaucrat(const Bureaucrat& variant) : 
 	_name(variant._name),
 	_grade(variant._grade)
 {
 	std::cout << "Copy Constrcutor Called" << std::endl;
 }
-
-
 
 
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat& variant)
@@ -56,8 +55,6 @@ Bureaucrat& Bureaucrat::operator=(const Bureaucrat& variant)
 		this->_grade = variant._grade;
 	return (*this);
 }
-
-
 
 		
 void	Bureaucrat::incrementGrade()
@@ -77,7 +74,33 @@ void	Bureaucrat::decrementGrade()
 	 	_grade++;
 }
 
+void Bureaucrat::signForm(AForm& form)
+{
+    try 
+    {
+        form.beSigned(*this);
+        std::cout << this->_name << " signed " << form.getName() << std::endl;
+    } 
+    catch (const std::exception& e) 
+    {
+        std::cout << this->_name << " couldn't sign " << form.getName() 
+                  << " because " << e.what() << std::endl;
+    }
+}
 
+void Bureaucrat::executeForm(AForm const & form)
+{
+    try 
+    {
+        form.executionAction(*this); 
+        std::cout << this->_name << " executed " << form.getName() << std::endl;
+    } 
+    catch (const std::exception& e) 
+    {
+        std::cout << this->_name << " couldn't execute " << form.getName() 
+                  << " because " << e.what() << std::endl;
+    }
+}
 
 std::ostream& operator<<(std::ostream& os, const Bureaucrat& bureaucrat)
 {

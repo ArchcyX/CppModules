@@ -71,6 +71,16 @@ void	AForm::beSigned(const Bureaucrat& person)
 	this->_isSign = true;
 }
 
+void AForm::executionAction(const Bureaucrat& person) const
+{
+    if (!this->getSignState())
+        throw AForm::FormUnsignedException();
+        
+    if (person.getGrade() > this->getGradeToExecute())
+        throw AForm::GradeToLowException();
+        
+    this->formExecuteAction(); 
+}
 
 const char	*AForm::GradeToLowException::what() const throw()
 {
@@ -80,6 +90,11 @@ const char	*AForm::GradeToLowException::what() const throw()
 const char	*AForm::GradeToHighException::what() const throw()
 {
 	return ("Person Grade Too High");
+}
+
+const char* AForm::FormUnsignedException::what() const throw()
+{
+    return "Error Form Unsigned";
 }
 
 std::ostream& operator<<(std::ostream& os, const AForm& form)

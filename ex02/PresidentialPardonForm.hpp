@@ -38,7 +38,7 @@ class	PresidentialPardonForm : public AForm
 		//-----------------------------------
 		//						OTHER METHODS
 		//-----------------------------------
-		virtual void	formexecuteaction()	const;
+		virtual void	formExecuteAction()	const;
 };
 
 #endif
