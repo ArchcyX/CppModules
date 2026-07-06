@@ -1,0 +1,6 @@
+
+MyClass::MyClass() {
+}
+
+MyClass::~MyClass() {
+}
