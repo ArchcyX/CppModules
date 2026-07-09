@@ -12,14 +12,11 @@
 
 #include <iostream>
 #include <exception>
-#include <cstdlib>
-#include <ctime>
-
 #include "Bureaucrat.hpp"
-#include "ShrubberyCreationForm.hpp"
-#include "RobotomyRequestForm.hpp"
-#include "PresidentialPardonForm.hpp"
+#include "Intern.hpp"
+#include "AForm.hpp"
 
+// Görselleştirme için renk tanımlamaları
 #define RESET   "\033[0m"
 #define RED     "\033[31m"
 #define GREEN   "\033[32m"
@@ -27,95 +24,141 @@
 #define CYAN    "\033[36m"
 #define MAGENTA "\033[35m"
 
-void    customTerminate()
-{
-    std::cerr << RED << "\n[SİSTEM ÇÖKTÜ] Yakalanmayan bir hata (Uncaught Exception) fırlatıldı!" << RESET << std::endl;
-    std::cerr << RED << "İşletim sistemi 'abort' çağrısı yapmadan önce program güvenlice kapatılıyor..." << RESET << std::endl;
-    exit(1);
-}
-
 int main(void)
 {
-    std::set_terminate(customTerminate);
-    std::srand(std::time(NULL));
-
-    std::cout << CYAN << "\n=======================================================" << RESET << std::endl;
-    std::cout << CYAN << "             BUREAUCRACY SYSTEM INITIALIZED            " << RESET << std::endl;
+    std::cout << CYAN << "=======================================================" << RESET << std::endl;
+    std::cout << CYAN << "        STAJYER (INTERN) SISTEMI TESTLERI BAŞLADI       " << RESET << std::endl;
     std::cout << CYAN << "=======================================================\n" << RESET << std::endl;
 
-    std::cout << YELLOW << "\n--- TEST 1: Shrubbery Creation (Ağaç Dikme) ---" << RESET << std::endl;
+    Intern      stajyer;
+    Bureaucrat  yuceYonetici("Müdür Ahmet", 1);
+    Bureaucrat  stajyerYardimcisi("Stajyer Ali", 150);
+    AForm* form = NULL;
+
+    // =========================================================================
+    // TEST 1: Shrubbery Creation Form Başarılı Senaryo
+    // =========================================================================
+    std::cout << YELLOW << "--- TEST 1: Shrubbery Creation (Ağaç Dikme Formu) ---" << RESET << std::endl;
     try 
     {
-        Bureaucrat gardener("Bahçıvan Ali", 130);
-        ShrubberyCreationForm form1("Bahce");
-
-        std::cout << form1 << std::endl;
-        gardener.signForm(form1);
-        gardener.executeForm(form1);
+        form = stajyer.makeForm("shrubbery creation", "Bahce_Hedefi");
+        if (form)
+        {
+            std::cout << *form << std::endl;
+            yuceYonetici.signForm(*form);
+            yuceYonetici.executeForm(*form);
+            
+            delete form; // İşimiz bitti, belleği temizliyoruz
+            form = NULL;
+        }
     }
     catch (const std::exception& e) 
     {
-        std::cerr << RED << "Hata: " << e.what() << RESET << std::endl;
-    }
-
-    std::cout << YELLOW << "\n--- TEST 2: Robotomy Request (Matkap Sesi) ---" << RESET << std::endl;
-    try 
-    {
-        Bureaucrat mechanic("Mühendis Ayşe", 40);
-        RobotomyRequestForm form2("Bender");
-
-        mechanic.signForm(form2);
-        mechanic.executeForm(form2);
-        mechanic.executeForm(form2);
-    }
-    catch (const std::exception& e) 
-    {
-        std::cerr << RED << "Hata: " << e.what() << RESET << std::endl;
-    }
-
-    std::cout << YELLOW << "\n--- TEST 3: Presidential Pardon (Başkanlık Affı) ---" << RESET << std::endl;
-    try 
-    {
-        Bureaucrat boss("Başkan", 1);
-        PresidentialPardonForm form3("Arthur Dent");
-
-        boss.signForm(form3);
-        boss.executeForm(form3);
-    }
-    catch (const std::exception& e) 
-    {
-        std::cerr << RED << "Hata: " << e.what() << RESET << std::endl;
+        std::cerr << RED << "Beklenmeyen Hata: " << e.what() << RESET << std::endl;
+        if (form) { delete form; form = NULL; } // Hata durumunda sızıntıyı önle
     }
 
     // =========================================================================
-    // TEST 4: ERROR HANDLING (Yetki Yetersizliği ve İmzasız Form)
+    // TEST 2: Robotomy Request Form Başarılı Senaryo
     // =========================================================================
-    std::cout << YELLOW << "\n--- TEST 4: Güvenlik Ağları (Hata Yakalama) ---" << RESET << std::endl;
+    std::cout << YELLOW << "\n--- TEST 2: Robotomy Request (Robotlaştırma Formu) ---" << RESET << std::endl;
     try 
     {
-        Bureaucrat intern("Stajyer", 150);
-        PresidentialPardonForm form4("Tehlikeli Suçlu");
-
-        // 1. Durum: İmzasız formu yürütmeye çalışmak (Exception fırlatmalı)
-        std::cout << MAGENTA << "[Deneme 1] İmzasız formu yürütmeye çalışma:" << RESET << std::endl;
-        intern.executeForm(form4); // DÜZELTİLDİ: executionForm -> executeForm
+        form = stajyer.makeForm("robotomy request", "Bender_Target");
+        if (form)
+        {
+            yuceYonetici.signForm(*form);
+            yuceYonetici.executeForm(*form);
+            
+            delete form;
+            form = NULL;
+        }
     }
     catch (const std::exception& e) 
     {
-        std::cerr << RED << "Yakalandı: " << e.what() << RESET << std::endl;
+        std::cerr << RED << "Beklenmeyen Hata: " << e.what() << RESET << std::endl;
+        if (form) { delete form; form = NULL; }
     }
 
+    // =========================================================================
+    // TEST 3: Presidential Pardon Form Başarılı Senaryo
+    // =========================================================================
+    std::cout << YELLOW << "\n--- TEST 3: Presidential Pardon (Başkanlık Affı Formu) ---" << RESET << std::endl;
     try 
     {
-        Bureaucrat intern("Stajyer", 150);
-        PresidentialPardonForm form4("Tehlikeli Suçlu");
-
-        std::cout << MAGENTA << "\n[Deneme 2] Yetkisiz imza denemesi:" << RESET << std::endl;
-        intern.signForm(form4);
+        form = stajyer.makeForm("presidential pardon", "Arthur Dent");
+        if (form)
+        {
+            yuceYonetici.signForm(*form);
+            yuceYonetici.executeForm(*form);
+            
+            delete form;
+            form = NULL;
+        }
     }
     catch (const std::exception& e) 
     {
-        std::cerr << RED << "Yakalandı: " << e.what() << RESET << std::endl;
+        std::cerr << RED << "Beklenmeyen Hata: " << e.what() << RESET << std::endl;
+        if (form) { delete form; form = NULL; }
+    }
+
+    // =========================================================================
+    // TEST 4: GEÇERSİZ FORM ADI - ÖZEL EXCEPTION TESTI
+    // =========================================================================
+    std::cout << YELLOW << "\n--- TEST 4: Hata Yönetimi (Geçersiz Form İsmi) ---" << RESET << std::endl;
+    try 
+    {
+        std::cout << MAGENTA << "[Deneme] Olmayan bir form adı giriliyor ('coffee making')..." << RESET << std::endl;
+        form = stajyer.makeForm("coffee making", "Yonetici_Odasi");
+        
+        // Eğer kod buraya ulaşırsa hata var demektir, çünkü exception fırlatmalıydı!
+        std::cout << RED << "HATA: Sistem exception fırlatmadı!" << RESET << std::endl;
+        if (form) { delete form; form = NULL; }
+    }
+    catch (const Intern::FormNotFoundException& e) 
+    {
+        // Yazdığın özel exception'ın buraya düşmesi bekleniyor
+        std::cout << GREEN << "BAŞARILI: Yazdığın özel exception yakalandı!" << RESET << std::endl;
+        std::cerr << RED << "Fırlatılan Mesaj: " << e.what() << RESET << std::endl;
+    }
+    catch (const std::exception& e) 
+    {
+        std::cerr << RED << "Farklı bir exception yakalandı: " << e.what() << RESET << std::endl;
+    }
+
+    // =========================================================================
+    // TEST 5: ENTEGRASYON TESTI (Stajyer Oluşturur Ama Bürokratın Gücü Yetmez)
+    // =========================================================================
+    std::cout << YELLOW << "\n--- TEST 5: Entegrasyon (Form Doğru Ama Bürokrat Yetkisiz) ---" << RESET << std::endl;
+    try 
+    {
+        form = stajyer.makeForm("presidential pardon", "Tehlikeli Suçlu");
+        if (form)
+        {
+            std::cout << MAGENTA << "[Deneme] Düşük rütbeli bürokrat formu imzalamaya çalışıyor..." << RESET << std::endl;
+            stajyerYardimcisi.signForm(*form); // İmzalayamayacak (Yetki yetersiz logu basacak)
+            
+            std::cout << MAGENTA << "[Deneme] Düşük rütbeli bürokrat imzasız formu çalıştırmaya çalışıyor..." << RESET << std::endl;
+            stajyerYardimcisi.executeForm(*form); // Form imzasız olduğu için fırlatacak
+            
+            // Eğer üstteki satır fırlatırsa alt satıra geçmez, catch bloğuna atlar. 
+            // Bu yüzden catch bloğunda temizlik kontrolü şarttır.
+            delete form;
+            form = NULL;
+        }
+    }
+    catch (const std::exception& e) 
+    {
+        std::cout << GREEN << "BAŞARILI: Yetkisiz işlem engellendi ve hata yakalandı." << RESET << std::endl;
+        std::cerr << RED << "Yakalanan Hata: " << e.what() << RESET << std::endl;
+        
+        // Bellek sızıntısını önlemek için buradaki pointer'ı temizliyoruz
+        if (form) 
+        {
+            delete form; 
+            form = NULL;
+            std::cout << CYAN << "[Sistem Bilgisi] Bellek sızıntısı başarıyla engellendi (Form heap'ten silindi)." << RESET << std::endl;
+        }
     }
 
     std::cout << GREEN << "\n=======================================================" << RESET << std::endl;

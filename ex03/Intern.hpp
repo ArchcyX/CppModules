@@ -13,15 +13,30 @@
 #ifndef	INTERN_HPP
 #define	INTERN_HPP
 
+#include "AForm.hpp"
+#include <exception>
+#include <iostream>
+#include <string>
+
 class Intern {
 	
 	public:
 
+		//-----------------[OCF METHODS]-----------//
 		Intern();
 		~Intern();
 		Intern(const Intern& variant);
 		Intern& operator=(const Intern& variant);
-
+		
+		//-------------------[]-------------------//
+		AForm* makeForm(std::string formName, std::string target);
+	
+		//-----------------[EXCEPTION METHODS]----------//
+		class FormNotFoundException : public std::exception
+		{
+			public:
+				virtual	const char* what() const throw();
+		};
 	private:
 	
 };
