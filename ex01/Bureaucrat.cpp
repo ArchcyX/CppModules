@@ -50,6 +50,10 @@ Bureaucrat& Bureaucrat::operator=(const Bureaucrat& variant)
 	return (*this);
 }
 
+void	Bureaucrat::signForm(Form& form)
+{
+
+}
 		
 void	Bureaucrat::incrementGrade()
 {
