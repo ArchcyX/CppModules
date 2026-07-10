@@ -9,9 +9,11 @@
 /*   Updated: 2026/06/07 17:53:54 by alermi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "Bureaucrat.hpp"
 #include <ostream>
 #include <string>
+#include "Form.hpp"
 
 Bureaucrat::Bureaucrat() : _name("Default Bureaucrat"), _grade(150)
 {
@@ -52,7 +54,16 @@ Bureaucrat& Bureaucrat::operator=(const Bureaucrat& variant)
 
 void	Bureaucrat::signForm(Form& form)
 {
-
+	try 
+    {
+        form.beSigned(*this); 
+        std::cout << this->_name << " signed " << form.getName() << std::endl;
+    } 
+    catch (const std::exception& e) 
+    {
+        std::cout << this->_name << " couldn't sign " << form.getName() 
+                  << " because " << e.what() << std::endl;
+    }
 }
 		
 void	Bureaucrat::incrementGrade()
