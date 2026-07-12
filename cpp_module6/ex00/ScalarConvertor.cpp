@@ -32,23 +32,55 @@ ScalarConvertor& ScalarConvertor::operator=(const ScalarConvertor& other)
 
 }
 
-//
-//
-//
+//==============================================================================
+//															CONVERTION METHODS
+//==============================================================================
 
 bool	ScalarConvertor::isInt(const std::string& value)
 {
+	size_t	i = 0;
 
+	if (value.empty())
+		return (false);
+
+	if (value[i] == '-' || value [i] == '+')
+	{
+		i++;
+		if (value.length() == i)
+			return (false);
+	}
+
+	for (; i < value.length(); i++)
+	{
+		if (!std::isdigit(value[i]))
+			return (false);
+	}
+	return (true);
 }
 
 bool	ScalarConvertor::isFloat(const std::string& value)
 {
+	int	dot_flag = 0;
 
+	if (value.empty() || (value.length()) - 1 != 'f')
+		return (false);
+
+	for (int i = 0; (value.length()) - 1; i++)
+	{
+		if (std::isdigit(value[i]))
+			continue;
+		else if (value[i] == '.' && dot_flag == 0)
+			dot_flag = 1;
+		else if (value[i] == '.' && dot_flag == 1)
+			return (false);
+	}
 }
 
 bool	ScalarConvertor::isChar(const std::string& value)
 {
-
+	if (value.length() != 1 || (std::isdigit(value[0])))
+		return (false);
+	return (true);
 }
 
 bool	ScalarConvertor::isDouble(const std::string& value)
