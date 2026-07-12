@@ -32,6 +32,10 @@ class	ScalarConvertor
 		bool	isDouble(const std::string& value);
 		bool	isPseudoLiteral(const std::string& value);
 
+		void	printInt(const std::string& value);
+		void	printFloatanDouble(const std::string& value);
+		void	printChar(const std::string& value);
+		void	printPreudoLiteral(const std::string& value);
 };
 
 #endif

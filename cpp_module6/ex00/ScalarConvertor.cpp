@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ScalarConvertor.hpp"
+#include "./ScalarConvertor.hpp"
 #include <string>
 #include <cctype>
 
@@ -110,4 +110,67 @@ bool	ScalarConvertor::isPseudoLiteral(const std::string& value)
 			value == "nan" || value == "+inf");
 }
 
+void	ScalarConvertor::printChar(const std::string& value)
+{
+	char c = literal[0];
 
+	int		i = static_cast<int>(c);
+	float	f = static_cast<float>(c);
+	double	d = static_cast<double>(c);
+
+	if (std::isprint(c))
+        std::cout << "char: '" << c << "'\n";
+    else
+        std::cout << "char: Non displayable\n";
+
+    std::cout << "int: " << i << "\n";
+
+    std::cout << "float: " << f << ".0f\n";
+    std::cout << "double: " << d << ".0\n";
+}
+
+void	ScalarConvertor::printInt(const std::string& value)
+{
+	char* endPtr;
+
+    long asLong = std::strtol(literal.c_str(), &endPtr, 10);
+
+    if (asLong > std::numeric_limits<int>::max()
+			|| asLong < std::numeric_limits<int>::min()) {
+        std::cout << "int: impossible\n";
+    } else {
+        int asInt = static_cast<int>(asLong);
+        std::cout << "int: " << asInt << "\n";
+    }
+}
+
+void	ScalarConvertor::printFloatanDouble(const std::string& value)
+{
+	char* endPtr;
+
+    double asDouble = std::strtod(literal.c_str(), &endPtr);
+
+    float asFloat = static_cast<float>(asDouble);
+
+    std::cout << "float: " << asFloat << "f\n";
+    std::cout << "double: " << asDouble << "\n";
+}
+
+static void	ScalarConvertor::convert(const std::string& literal)
+{
+	if (isChar(literal))
+		printChar(literal);
+	else if (isInt(literal))
+		printInt(literal);
+	else if (isDouble(literal || isFloat(literal))
+		printFloatanDouble(literal);
+	else if (isPseudoLiteral(literal))
+		printPreudoLiteral(literal);
+	else
+	{
+		std::cout << "char: impossible" std::endl;
+		std::cout << "Int: impossible" std::endl;
+		std::cout << "Float: impossible" std::endl;
+		std::cout << "Double: impossible" std::endl;
+	}
+}
