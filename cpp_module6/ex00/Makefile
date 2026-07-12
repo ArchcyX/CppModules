@@ -8,6 +8,15 @@ CYAN         = \033[1;36m
 RESET        = \033[0m
 
 # ============================================================
+#                        TEST VALUES
+# ============================================================
+
+TEST_CASES = "a" "*" "0" "42" "-42" "2147483647" "-2147483648" "2147483649" \
+             "-2147483649" "0.0f" "4.2f" "-4.2f" "0.0" "4.2" "-4.2" \
+             "nan" "nanf" "inf" "-inf" "+inf" "inff" "-inff" "+inff" \
+             "hello" "12f" "12.af" "42.42.42" ""
+
+# ============================================================
 #                       PROJECT CONFIG
 # ============================================================
 NAME        = convert
@@ -62,13 +71,22 @@ re: fclean all
 #                        RUN COMMANDS
 # ============================================================
 run: all
-	@echo "$(GREEN)>>> Running program with argument: '$(ARG)'...$(RESET)\n"
-	@./$(NAME) $(ARG)
+	@echo "\n$(GREEN)====================================================$(RESET)"
+	@echo "$(YELLOW)      SCALAR CONVERTER KAPSAMLI TEST BAŞLIYOR$(RESET)"
+	@echo "$(GREEN)====================================================$(RESET)\n"
+	@for val in $(TEST_CASES); do \
+		echo "$(CYAN)----------------------------------------------------$(RESET)"; \
+		echo "$(YELLOW)Test ediliyor: ./$(NAME) '$$val'$(RESET)"; \
+		echo "$(CYAN)----------------------------------------------------$(RESET)"; \
+		./$(NAME) "$$val"; \
+		echo ""; \
+	done
+	@echo "$(GREEN)>>> Tüm testler tamamlandı!$(RESET)\n"
 
 runv: all
-	@echo "$(YELLOW)>>> Running program with valgrind, argument: '$(ARG)'...$(RESET)\n"
+	@echo "$(YELLOW)>>> Valgrind ile tekli test çalıştırılıyor...$(RESET)\n"
+	@echo "Kullanım: make runv ARG=\"test_degeri\""
 	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) $(ARG)
-
 # ============================================================
 #                        HELP COMMAND
 # ============================================================
