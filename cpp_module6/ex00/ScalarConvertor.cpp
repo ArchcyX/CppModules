@@ -91,7 +91,7 @@ bool ScalarConvertor::isFloat(const std::string& value)
         else
             return (false);
     }
-    return (digit_flag && dot_flag);
+    return (digit_flag);
 }
 
 bool	ScalarConvertor::isChar(const std::string& value)
@@ -133,46 +133,102 @@ void	ScalarConvertor::printChar(const std::string& value)
     std::cout << "double: " << d << ".0\n";
 }
 
-void	ScalarConvertor::printInt(const std::string& value)
+void ScalarConvertor::printInt(const std::string& value)
 {
-	char* endPtr;
-
+    char* endPtr;
     long asLong = std::strtol(value.c_str(), &endPtr, 10);
 
-    if (asLong > std::numeric_limits<int>::max()
-			|| asLong < std::numeric_limits<int>::min()) {
+    if (asLong > std::numeric_limits<int>::max() || asLong < std::numeric_limits<int>::min())
+    {
+        std::cout << "char: impossible\n";
         std::cout << "int: impossible\n";
-    } else {
-        int asInt = static_cast<int>(asLong);
-        std::cout << "int: " << asInt << "\n";
+        std::cout << "float: impossible\n";
+        std::cout << "double: impossible\n";
+        return;
+    }
+
+    int asInt = static_cast<int>(asLong);
+
+    // Char
+    if (asInt < 0 || asInt > 127)
+        std::cout << "char: impossible\n";
+    else if (!std::isprint(asInt))
+        std::cout << "char: Non displayable\n";
+    else
+        std::cout << "char: '" << static_cast<char>(asInt) << "'\n";
+
+    std::cout << "int: " << asInt << "\n";
+    std::cout << "float: " << static_cast<float>(asInt) << ".0f\n";
+    std::cout << "double: " << static_cast<double>(asInt) << ".0\n";
+}
+
+void ScalarConvertor::printFloatAndDouble(const std::string& value)
+{
+    char* endPtr;
+    double asDouble = std::strtod(value.c_str(), &endPtr);
+    float asFloat = static_cast<float>(asDouble);
+
+    if (asDouble < 0 || asDouble > 127)
+        std::cout << "char: impossible\n";
+    else if (!std::isprint(static_cast<int>(asDouble)))
+        std::cout << "char: Non displayable\n";
+    else
+        std::cout << "char: '" << static_cast<char>(asDouble) << "'\n";
+
+    if (asDouble > std::numeric_limits<int>::max() || asDouble < std::numeric_limits<int>::min())
+        std::cout << "int: impossible\n";
+    else
+        std::cout << "int: " << static_cast<int>(asDouble) << "\n";
+
+    if (asFloat == static_cast<int>(asFloat))
+	{
+        std::cout << "float: " << asFloat << ".0f\n";
+        std::cout << "double: " << asDouble << ".0\n";
+    }
+	else 
+	{
+        std::cout << "float: " << asFloat << "f\n";
+        std::cout << "double: " << asDouble << "\n";
     }
 }
 
-void	ScalarConvertor::printFloatanDouble(const std::string& value)
+void ScalarConvertor::printPseudoLiteral(const std::string& literal) 
 {
-	char* endPtr;
+    std::cout << "char: impossible\n";
+    std::cout << "int: impossible\n";
 
-    double asDouble = std::strtod(value.c_str(), &endPtr);
-
-    float asFloat = static_cast<float>(asDouble);
-
-    std::cout << "float: " << asFloat << "f\n";
-    std::cout << "double: " << asDouble << "\n";
+    if (literal == "nan" || literal == "nanf")
+	{
+        std::cout << "float: nanf\n";
+        std::cout << "double: nan\n";
+    }
+	else if (literal == "+inf" || literal == "+inff")
+	{
+        std::cout << "float: +inff\n";
+        std::cout << "double: +inf\n";
+    }
+	else if (literal == "-inf" || literal == "-inff")
+	{
+        std::cout << "float: -inff\n";
+        std::cout << "double: -inf\n";
+    }
 }
 
-void	ScalarConvertor::convert(const std::string& literal)
+void ScalarConvertor::convert(const std::string& literal) 
 {
-	if (isChar(literal))
-		printChar(literal);
-	else if (isInt(literal))
-		printInt(literal);
-	else if (isDouble(literal) || isFloat(literal))
-		printFloatanDouble(literal);
-	else
+    if (isPseudoLiteral(literal))
+        printPseudoLiteral(literal);
+    else if (isChar(literal))
+        printChar(literal);
+    else if (isInt(literal))
+        printInt(literal);
+    else if (isFloat(literal) || isDouble(literal))
+        printFloatAndDouble(literal);
+    else
 	{
-		std::cout << "char: impossible" << std::endl;
-		std::cout << "Int: impossible" << std::endl;
-		std::cout << "Float: impossible" << std::endl;
-		std::cout << "Double: impossible" << std::endl;
-	}
+        std::cout << "char: impossible\n";
+        std::cout << "int: impossible\n";
+        std::cout << "float: impossible\n";
+        std::cout << "double: impossible\n";
+    }
 }

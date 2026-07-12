@@ -21,10 +21,6 @@ class	ScalarConvertor
 		ScalarConvertor();
 		~ScalarConvertor();
 		ScalarConvertor(const ScalarConvertor& variant);
-	
-	public:
-		ScalarConvertor& operator=(const ScalarConvertor& other);
-		static void	convert(const std::string& literal);
 
 		static bool	isInt(const std::string& value);
 		static bool	isFloat(const std::string& value);
@@ -33,8 +29,15 @@ class	ScalarConvertor
 		static bool	isPseudoLiteral(const std::string& value);
 
 		static void	printInt(const std::string& value);
-		static void	printFloatanDouble(const std::string& value);
+		static void printFloatAndDouble(const std::string& literal);
 		static void	printChar(const std::string& value);
+		static void printPseudoLiteral(const std::string& literal);
+	
+	public:
+		ScalarConvertor& operator=(const ScalarConvertor& other);
+		static void	convert(const std::string& literal);
+
+
 };
 
 #endif
