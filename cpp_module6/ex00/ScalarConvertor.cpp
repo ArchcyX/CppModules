@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 #include "ScalarConvertor.hpp"
+#include <string>
+#include <cctype>
 
 ScalarConvertor::ScalarConvertor()
 {
@@ -58,22 +60,34 @@ bool	ScalarConvertor::isInt(const std::string& value)
 	return (true);
 }
 
-bool	ScalarConvertor::isFloat(const std::string& value)
+
+bool ScalarConvertor::isFloat(const std::string& value)
 {
-	int	dot_flag = 0;
+    bool    dot_flag = false;
+    bool    digit_flag = false;
+    size_t  i = 0;
+    size_t  len = value.length();
 
-	if (value.empty() || (value.length()) - 1 != 'f')
-		return (false);
-
-	for (int i = 0; (value.length()) - 1; i++)
-	{
-		if (std::isdigit(value[i]))
-			continue;
-		else if (value[i] == '.' && dot_flag == 0)
-			dot_flag = 1;
-		else if (value[i] == '.' && dot_flag == 1)
-			return (false);
-	}
+    if (value == "-inff" || value == "+inff" || value == "nanf")
+        return (true);
+    if (len < 2 || value[len - 1] != 'f')
+        return (false);
+    if (value[i] == '-' || value[i] == '+')
+        i++;
+    for (; i < len - 1; i++)
+    {
+        if (std::isdigit(value[i])) {
+            digit_flag = true;
+            continue;
+        }
+        else if (value[i] == '.' && dot_flag == false)
+            dot_flag = true;
+        else if (value[i] == '.' && dot_flag == true)
+            return (false);
+        else
+            return (false);
+    }
+    return (digit_flag && dot_flag);
 }
 
 bool	ScalarConvertor::isChar(const std::string& value)
@@ -83,9 +97,11 @@ bool	ScalarConvertor::isChar(const std::string& value)
 	return (true);
 }
 
-bool	ScalarConvertor::isDouble(const std::string& value)
+bool ScalarConvertor::isDouble(const std::string& value)
 {
-
+    if (value == "-inf" || value == "+inf" || value == "nan")
+		return (true);
+    return (isFloat(value + "f"));
 }
 
 bool	ScalarConvertor::isPseudoLiteral(const std::string& value)
