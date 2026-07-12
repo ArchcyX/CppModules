@@ -1,5 +1,4 @@
 #include "./Serializer.hpp"
-#include "./Serializer.cpp"
 
 #define RESET   "\033[0m"
 #define RED     "\033[31m"
