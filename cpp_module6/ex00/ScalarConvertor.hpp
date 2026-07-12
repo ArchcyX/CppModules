@@ -26,16 +26,15 @@ class	ScalarConvertor
 		ScalarConvertor& operator=(const ScalarConvertor& other);
 		static void	convert(const std::string& literal);
 
-		bool	isInt(const std::string& value);
-		bool	isFloat(const std::string& value);
-		bool	isChar(const std::string& value);
-		bool	isDouble(const std::string& value);
-		bool	isPseudoLiteral(const std::string& value);
+		static bool	isInt(const std::string& value);
+		static bool	isFloat(const std::string& value);
+		static bool	isChar(const std::string& value);
+		static bool	isDouble(const std::string& value);
+		static bool	isPseudoLiteral(const std::string& value);
 
-		void	printInt(const std::string& value);
-		void	printFloatanDouble(const std::string& value);
-		void	printChar(const std::string& value);
-		void	printPreudoLiteral(const std::string& value);
+		static void	printInt(const std::string& value);
+		static void	printFloatanDouble(const std::string& value);
+		static void	printChar(const std::string& value);
 };
 
 #endif

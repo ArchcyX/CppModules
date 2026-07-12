@@ -11,8 +11,11 @@
 /* ************************************************************************** */
 
 #include "./ScalarConvertor.hpp"
+#include <iostream>
 #include <string>
 #include <cctype>
+#include <cstdlib>
+#include <limits>
 
 ScalarConvertor::ScalarConvertor()
 {
@@ -26,12 +29,13 @@ ScalarConvertor::~ScalarConvertor()
 
 ScalarConvertor::ScalarConvertor(const ScalarConvertor& variant)
 {
-
+	(void)variant;
 }
 
 ScalarConvertor& ScalarConvertor::operator=(const ScalarConvertor& other)
 {
-
+	(void)other;
+	return *this;
 }
 
 //==============================================================================
@@ -112,7 +116,7 @@ bool	ScalarConvertor::isPseudoLiteral(const std::string& value)
 
 void	ScalarConvertor::printChar(const std::string& value)
 {
-	char c = literal[0];
+	char c = value[0];
 
 	int		i = static_cast<int>(c);
 	float	f = static_cast<float>(c);
@@ -133,7 +137,7 @@ void	ScalarConvertor::printInt(const std::string& value)
 {
 	char* endPtr;
 
-    long asLong = std::strtol(literal.c_str(), &endPtr, 10);
+    long asLong = std::strtol(value.c_str(), &endPtr, 10);
 
     if (asLong > std::numeric_limits<int>::max()
 			|| asLong < std::numeric_limits<int>::min()) {
@@ -148,7 +152,7 @@ void	ScalarConvertor::printFloatanDouble(const std::string& value)
 {
 	char* endPtr;
 
-    double asDouble = std::strtod(literal.c_str(), &endPtr);
+    double asDouble = std::strtod(value.c_str(), &endPtr);
 
     float asFloat = static_cast<float>(asDouble);
 
@@ -156,21 +160,19 @@ void	ScalarConvertor::printFloatanDouble(const std::string& value)
     std::cout << "double: " << asDouble << "\n";
 }
 
-static void	ScalarConvertor::convert(const std::string& literal)
+void	ScalarConvertor::convert(const std::string& literal)
 {
 	if (isChar(literal))
 		printChar(literal);
 	else if (isInt(literal))
 		printInt(literal);
-	else if (isDouble(literal || isFloat(literal))
+	else if (isDouble(literal) || isFloat(literal))
 		printFloatanDouble(literal);
-	else if (isPseudoLiteral(literal))
-		printPreudoLiteral(literal);
 	else
 	{
-		std::cout << "char: impossible" std::endl;
-		std::cout << "Int: impossible" std::endl;
-		std::cout << "Float: impossible" std::endl;
-		std::cout << "Double: impossible" std::endl;
+		std::cout << "char: impossible" << std::endl;
+		std::cout << "Int: impossible" << std::endl;
+		std::cout << "Float: impossible" << std::endl;
+		std::cout << "Double: impossible" << std::endl;
 	}
 }
