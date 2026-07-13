@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alermi <alermi@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/07/13 13:19:49 by alermi            #+#    #+#             */
+/*   Updated: 2026/07/13 13:20:51 by alermi           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "./Serializer.hpp"
 
 #define RESET   "\033[0m"
@@ -9,7 +21,6 @@
 #define CYAN    "\033[36m"
 #define WHITE   "\033[37m"
 
-// Kalın (Bold) Renkler
 #define BOLD_RED    "\033[1;31m"
 #define BOLD_GREEN  "\033[1;32m"
 #define BOLD_YELLOW "\033[1;33m"
