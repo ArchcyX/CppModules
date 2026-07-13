@@ -6,7 +6,16 @@
 /*   By: alermi <alermi@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/13 13:18:48 by alermi            #+#    #+#             */
-/*   Updated: 2026/07/13 13:18:49 by alermi           ###   ########.fr       */
+/*   Updated: 2026/07/13 14:44:19 by alermi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "./Base.hpp"
+
+class	A : public Base
+{
+	private:
+
+	public:
+
+};
