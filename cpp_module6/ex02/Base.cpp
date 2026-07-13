@@ -6,7 +6,10 @@
 /*   By: alermi <alermi@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/13 13:19:01 by alermi            #+#    #+#             */
-/*   Updated: 2026/07/13 13:19:02 by alermi           ###   ########.fr       */
+/*   Updated: 2026/07/13 17:17:39 by alermi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "Base.hpp"
+#include <iostream>
 

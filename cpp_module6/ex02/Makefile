@@ -6,7 +6,7 @@
 #    By: alermi <alermi@student.42kocaeli.com.tr>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/07/13 14:39:55 by alermi            #+#    #+#              #
-#    Updated: 2026/07/13 14:41:30 by alermi           ###   ########.fr        #
+#    Updated: 2026/07/13 15:37:36 by alermi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,9 +35,6 @@ HEADERS     = ClassA.hpp	\
 			  Base.hpp
 
 SRC         = main.cpp \
-              ClassA.cpp	\
-			  ClassB.cpp	\
-			  ClassC.cpp	\
 			  Base.cpp
 
 OBJS        = $(SRC:.cpp=.o)

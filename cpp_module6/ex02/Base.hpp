@@ -6,7 +6,7 @@
 /*   By: alermi <alermi@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/13 13:18:57 by alermi            #+#    #+#             */
-/*   Updated: 2026/07/13 15:31:42 by alermi           ###   ########.fr       */
+/*   Updated: 2026/07/13 17:17:47 by alermi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ class Base
 	private:
 
 	public:
-		virtual ~Base();
+		virtual ~Base() {}
 };
 
 #endif
