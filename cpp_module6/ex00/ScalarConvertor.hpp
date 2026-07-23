@@ -10,34 +10,31 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCALARCONVERTOR_HPP
-#define SCALARCONVERTOR_HPP
+#ifndef SCALARCONVERTER_HPP
+#define SCALARCONVERTER_HPP
 
 #include <string>
 
-class	ScalarConvertor
-{
-	private:
-		ScalarConvertor();
-		~ScalarConvertor();
-		ScalarConvertor(const ScalarConvertor& variant);
+class ScalarConverter {
+private:
+  ScalarConverter();
+  ~ScalarConverter();
+  ScalarConverter(const ScalarConverter &variant);
+  ScalarConverter &operator=(const ScalarConverter &other);
 
-		static bool	isInt(const std::string& value);
-		static bool	isFloat(const std::string& value);
-		static bool	isChar(const std::string& value);
-		static bool	isDouble(const std::string& value);
-		static bool	isPseudoLiteral(const std::string& value);
+  static bool isInt(const std::string &value);
+  static bool isFloat(const std::string &value);
+  static bool isChar(const std::string &value);
+  static bool isDouble(const std::string &value);
+  static bool isPseudoLiteral(const std::string &value);
 
-		static void	printInt(const std::string& value);
-		static void printFloatAndDouble(const std::string& literal);
-		static void	printChar(const std::string& value);
-		static void printPseudoLiteral(const std::string& literal);
-	
-	public:
-		ScalarConvertor& operator=(const ScalarConvertor& other);
-		static void	convert(const std::string& literal);
+  static void printInt(const std::string &value);
+  static void printFloatAndDouble(const std::string &literal);
+  static void printChar(const std::string &value);
+  static void printPseudoLiteral(const std::string &literal);
 
-
+public:
+  static void convert(const std::string &literal);
 };
 
 #endif
