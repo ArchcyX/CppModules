@@ -31,8 +31,7 @@ ScalarConverter &ScalarConverter::operator=(const ScalarConverter &other) {
 }
 
 //==============================================================================
-//															CONVERTION
-//METHODS
+//															CONVERTION  METHODS
 //==============================================================================
 
 bool ScalarConverter::isInt(const std::string &value)
