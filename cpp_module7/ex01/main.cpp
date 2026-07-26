@@ -11,30 +11,23 @@
 /* ************************************************************************** */
 
 #include "Iter.hpp"
-#include <iostream>
-
-void	ft_upperCase(char *str, int size)
-{
-	int	i = 0;
-	for (; i < size; i++)
-	{
-		if (str[i] >= 'a' && str[i] <= 'z')
-			str[i] = str[i] - 32;
-	}
-}
-
-
-void	ftPrintArr(char *arr, size_t size)
-{
-	for (size_t i = 0; i < size; i++)
-		std::cout << arr[i] << std::endl;
-}
 
 int	main(void)
 {
-	std::string	arr[] = {"alp", "eren", "lermi"};
+	// std::string	arr[] = {"alp", "eren", "lermi"};
+	//
+	// Iter(arr, sizeof(arr), ft_upperCase);
+	// Iter(arr, 3, ftPrintArr);
 
-	Iter(arr, sizeof(arr), ft_upperCase);
-	Iter(arr, sizeof(arr), ftPrintArr);
+	int	arr[] = {97, 98,99};
+	double	arr1[] = {97, 98,99};
+	char	arr2[] = {97, 98,99};
+
+	Iter(arr, 3, multiplexer<int>);
+	Iter(arr, 3, ftPrintArr<int>);
+	Iter(arr1, 3, multiplexer<double>);
+	Iter(arr1, 3, ftPrintArr<double>);
+	Iter(arr2, 3, multiplexer<char>);
+	Iter(arr2, 3, ftPrintArr<char>);
 	return (0);
 }

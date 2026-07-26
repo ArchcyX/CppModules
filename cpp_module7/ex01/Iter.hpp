@@ -10,12 +10,31 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <iostream>
 
 template <typename T, typename F, typename Len>
 void	Iter(T *array, const Len size, F function)
 {
 	for	(Len i = 0; i < size; i++)
 	{
-		function(array[i], size);
+		function(array[i]);
 	}
+}
+
+template <typename T>
+void	multiplexer(T &value)
+{
+	value *= 2;
+}
+
+template <>
+void	multiplexer<char>(char &value)
+{
+	value += 1;
+}
+
+template <typename T>
+void	ftPrintArr(T value)
+{
+	std::cout << value << std::endl;
 }
