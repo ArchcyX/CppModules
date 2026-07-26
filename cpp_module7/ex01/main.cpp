@@ -12,22 +12,34 @@
 
 #include "Iter.hpp"
 
+
+
 int	main(void)
 {
-	// std::string	arr[] = {"alp", "eren", "lermi"};
-	//
-	// Iter(arr, sizeof(arr), ft_upperCase);
-	// Iter(arr, 3, ftPrintArr);
-
+	{
 	int	arr[] = {97, 98,99};
 	double	arr1[] = {97, 98,99};
 	char	arr2[] = {97, 98,99};
 
 	Iter(arr, 3, multiplexer<int>);
 	Iter(arr, 3, ftPrintArr<int>);
+
 	Iter(arr1, 3, multiplexer<double>);
 	Iter(arr1, 3, ftPrintArr<double>);
+
 	Iter(arr2, 3, multiplexer<char>);
 	Iter(arr2, 3, ftPrintArr<char>);
+	}
+	{	
+	const int		arr[] = {97, 98,99};
+	const double	arr1[] = {97, 98,99};
+	const char		arr2[] = {97, 98,99};
+
+	Iter(arr, 3, ftPrintArr<int>);
+
+	Iter(arr1, 3, ftPrintArr<double>);
+
+	Iter(arr2, 3, ftPrintArr<char>);
+	}
 	return (0);
 }

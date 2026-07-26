@@ -10,10 +10,22 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef	ITER_HPP
+#define	ITER_HPP
+
 #include <iostream>
 
 template <typename T, typename F, typename Len>
 void	Iter(T *array, const Len size, F function)
+{
+	for	(Len i = 0; i < size; i++)
+	{
+		function(array[i]);
+	}
+}
+
+template <typename T, typename F, typename Len>
+void	Iter(const T *array, const Len size, F function)
 {
 	for	(Len i = 0; i < size; i++)
 	{
@@ -38,3 +50,5 @@ void	ftPrintArr(T value)
 {
 	std::cout << value << std::endl;
 }
+
+#endif
