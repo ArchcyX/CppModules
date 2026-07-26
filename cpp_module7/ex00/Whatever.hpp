@@ -10,14 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-#include <string>
 
 template <typename T>
 void swap(T& valueOne, T& valueTwo)
 {
     T temp = valueOne; 
-    
+
     valueOne = valueTwo; 
     valueTwo = temp;
 }
