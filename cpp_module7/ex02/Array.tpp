@@ -75,6 +75,10 @@ class	Array
 				throw OutOfBoundException();
 			return (_values[index]);
 		}
+		size_t	size() const
+		{
+			return (_size);
+		}
 };
 
 #endif
