@@ -13,6 +13,7 @@
 #ifndef	ARRAY_TPP
 #define	ARRAY_TPP
 
+#include <exception>
 #include <iostream>
 
 template <typename T>
@@ -23,6 +24,15 @@ class	Array
 			size_t	_size;
 	public:
 		
+		class	OutOfBoundException : public std::exception
+		{
+			public:
+				virtual	const char *what() const throw() 
+				{
+					return ("Array Objects Error: Index is out of bounds");
+				}
+		};
+
 		Array() : _values(NULL), _size(0) {}
 		Array(unsigned int n) : _size(n)
 		{
@@ -52,6 +62,18 @@ class	Array
 			else
 				_values = NULL;
 			return *this;
+		}
+		T	&operator[](size_t index)
+		{
+			if (index >= _size)
+				throw OutOfBoundException();
+			return (_values[index]);
+		}
+		const T& operator=(size_t index)
+		{
+			if (index >= _size)
+				throw OutOfBoundException();
+			return (_values[index]);
 		}
 };
 
