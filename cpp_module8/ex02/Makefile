@@ -6,7 +6,7 @@
 #    By: alermi <alermi@student.42kocaeli.com.tr>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/07/27 20:20:51 by alermi            #+#    #+#              #
-#    Updated: 2026/07/27 20:21:33 by alermi           ###   ########.fr        #
+#    Updated: 2026/07/27 20:44:12 by alermi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ CXXFLAGS    = -Wall -Wextra -Werror -g -std=c++98
 # ============================================================
 #                        SOURCE & HEADER FILES
 # ============================================================
-HEADERS     = Mutant.hpp
+HEADERS     = MutantStack.hpp
 
 
 SRC         = main.cpp
