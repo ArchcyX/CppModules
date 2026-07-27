@@ -14,7 +14,6 @@
 #include "./Array.tpp"
 #include <iostream>
 #include <string>
-#include <cstdlib>
 
 #define RESET   "\033[0m"
 #define RED     "\033[31m"
