@@ -14,19 +14,29 @@
 #include <map>
 #include <exception>
 
-template <typename Date, typename Value>
 
 class	BitcoinExchange
 {
 	private:
-		std::string				_fileName;
-		std::map<Date, Value>	_data;
-		std::map<Date, Value>	_input;
+		std::string						_inputFile;
+		std::string						_dataFile;
+		std::map<std::string, float>	_data;
+		std::map<std::string, float>	_input;
 
 	public:
 	
 		//===================[EXCEPTION CLASS]===========================
-		class	FileNotFoundException : std::exception
+		class	FileNotOpenException : std::exception
+		{
+			virtual const char	*what() const throw();
+		};
+
+		class	WrongInputFormatException : std::exception
+		{
+			virtual const char	*what() const throw();
+		};
+
+		class	EmptyFileException : std::exception
 		{
 			virtual const char	*what() const throw();
 		};
@@ -34,14 +44,16 @@ class	BitcoinExchange
 		//================[ORHODOX CANNONICAL FORM]======================
 		BitcoinExchange();
 		~BitcoinExchange();
+		BitcoinExchange(const std::string inputFile, const std::string dataFile);
 		BitcoinExchange(const BitcoinExchange& variant);
 		BitcoinExchange& operator=(const BitcoinExchange& other);
 
 		//===================[PARSER METHODS]=============================
 
-		
+		void	parseDataBase();
+		void	processInput();
 		
 		//==================[GETTER & SETTER]=============================
-		void	setData(const std::map<Date, Value> _data);
-		std::map<Date, Value>	getData()	const;
+		void	setData(const std::map<std::string, float>& data);
+		std::map<std::string, float>	getData()	const;
 };

@@ -10,11 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "BitcoinExchange.hpp"
+#include <complex>
 #include <iostream>
 #include <fstream>
 #include <string>
 
+
 int	main(int argc, char **argv)
 {
+	if (argc != 2)
+		return 1;
 	std::cout << "|=========[CPP MODULE 9]========|" << std::endl;
+
+	const std::string	name = "input.cvc";
+	std::string	name2=	argv[1];
+	BitcoinExchange(name, name2);
 }

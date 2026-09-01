@@ -30,10 +30,11 @@ CXXFLAGS    = -Wall -Wextra -Werror -g -std=c++98
 # ============================================================
 #                        SOURCE & HEADER FILES
 # ============================================================
-HEADERS     = Whatever.hpp
+HEADERS     = BitcoinExchange.hpp
 
 
-SRC         = main.cpp
+SRC         = main.cpp	\
+			  BitcoinExchange.cpp
 
 OBJS        = $(SRC:.cpp=.o)
 
