@@ -22,21 +22,22 @@ class	BitcoinExchange
 		std::string						_dataFile;
 		std::map<std::string, float>	_data;
 		std::map<std::string, float>	_input;
+		int								_errorFlag;
 
 	public:
 	
 		//===================[EXCEPTION CLASS]===========================
-		class	FileNotOpenException : std::exception
+		class	FileNotOpenException : public std::exception
 		{
 			virtual const char	*what() const throw();
 		};
 
-		class	WrongInputFormatException : std::exception
+		class	WrongInputFormatException : public std::exception
 		{
 			virtual const char	*what() const throw();
 		};
 
-		class	EmptyFileException : std::exception
+		class	EmptyFileException : public std::exception
 		{
 			virtual const char	*what() const throw();
 		};

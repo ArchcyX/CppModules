@@ -23,7 +23,7 @@ int	main(int argc, char **argv)
 		return 1;
 	std::cout << "|=========[CPP MODULE 9]========|" << std::endl;
 
-	const std::string	name = "input.cvc";
+	const std::string	name = "data.csv";
 	std::string	name2=	argv[1];
-	BitcoinExchange(name, name2);
+	BitcoinExchange(name2, name);
 }

@@ -13,7 +13,9 @@
 #include "./BitcoinExchange.hpp"
 #include <exception>
 #include <fstream>
+#include <stdexcept>
 #include <string>
+
 
 BitcoinExchange::BitcoinExchange()
 {
@@ -51,42 +53,28 @@ BitcoinExchange&	BitcoinExchange::operator=(const BitcoinExchange& other)
 	return *this;
 }
 
-void BitcoinExchange::parseDataBase()
+void	BitcoinExchange::parseDataBase()
 {
-    std::ifstream dataFile(this->_dataFile.c_str());
-    std::ifstream inputFile(this->_inputFile.c_str());
-// --- DEBUG SATIRLARI BAŞLANGICI ---
-    std::cout << "DEBUG - data.csv acildi mi? (1=Evet, 0=Hayir): " << dataFile.is_open() << std::endl;
-    std::cout << "DEBUG - input dosyasi acildi mi? (1=Evet, 0=Hayir): " << inputFile.is_open() << std::endl;
-    // --- DEBUG SATIRLARI BİTİŞİ ---	try
-    try
+	std::ifstream	dataFile(this->_dataFile.c_str());
+	std::ifstream	inputFile(this->_inputFile.c_str());
+
+	if (dataFile.is_open() || !inputFile.is_open())
+		throw	FileNotOpenException();
+	std::string line;
+    
+    if (std::getline(inputFile, line))
 	{
+		if	(line != "date | value" || "date | value\r" || line != "date | value\n")
+			throw	WrongInputFormatException();
+	} else
+        throw EmptyFileException(); 
 
-        if (!dataFile.is_open() || !inputFile.is_open())
-        {
-            throw FileNotOpenException();
-        }
-		std::string line;
-        if (std::getline(inputFile, line))
-        {
-			if (line != "date | value" && line != "date | value\r" && line != "date | value\n")
-                throw WrongInputFormatException();
-        }
-        else
-        {
-            throw EmptyFileException(); 
-        }
-
-        std::string inputLine;
-        std::string dataLine;
-
-        while (std::getline(inputFile, inputLine))
-            std::cout << "Input: " << inputLine << std::endl;
-    }
-    catch (std::exception &e)
+    while (std::getline(inputFile, line))
     {
-        std::cerr << "Error: " << e.what() << std::endl;
+		getline(dataFile, line);
+		std::cout << line << std::endl;
     }
+
 }
 
 void	BitcoinExchange::processInput()
@@ -101,7 +89,7 @@ const char	*BitcoinExchange::FileNotOpenException::what() const throw()
 
 const char	*BitcoinExchange::WrongInputFormatException::what() const throw()
 {
-	return ("ERROR: File wront input format");
+	return ("ERROR: File can not open");
 }
 const char	*BitcoinExchange::EmptyFileException::what() const throw()
 {
