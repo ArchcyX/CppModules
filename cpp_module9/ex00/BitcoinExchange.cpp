@@ -11,9 +11,11 @@
 /* ************************************************************************** */
 
 #include "./BitcoinExchange.hpp"
+#include <cstdio>
 #include <exception>
 #include <fstream>
 #include <string>
+#include <stdlib.h>
 
 BitcoinExchange::BitcoinExchange()
 {
@@ -26,7 +28,7 @@ BitcoinExchange::BitcoinExchange(const std::string inputFile, const std::string 
 	_errorFlag(0)
 {
 	try {
-		parseDataBase();
+		validateFile();
 	} catch (std::exception &e) 
 	{
 		this->_errorFlag = 1;
@@ -51,42 +53,72 @@ BitcoinExchange&	BitcoinExchange::operator=(const BitcoinExchange& other)
 	return *this;
 }
 
-void BitcoinExchange::parseDataBase()
+void BitcoinExchange::validateFile()
 {
     std::ifstream dataFile(this->_dataFile.c_str());
     std::ifstream inputFile(this->_inputFile.c_str());
-// --- DEBUG SATIRLARI BAŞLANGICI ---
-    std::cout << "DEBUG - data.csv acildi mi? (1=Evet, 0=Hayir): " << dataFile.is_open() << std::endl;
-    std::cout << "DEBUG - input dosyasi acildi mi? (1=Evet, 0=Hayir): " << inputFile.is_open() << std::endl;
-    // --- DEBUG SATIRLARI BİTİŞİ ---	try
-    try
+
+	try
 	{
 
         if (!dataFile.is_open() || !inputFile.is_open())
         {
             throw FileNotOpenException();
         }
-		std::string line;
-        if (std::getline(inputFile, line))
+		std::string inputLine;
+		std::string	dataLine;
+        if (std::getline(inputFile, inputLine) && std::getline(dataFile, dataLine))
         {
-			if (line != "date | value" && line != "date | value\r" && line != "date | value\n")
+			if (inputLine != "date | value" && inputLine != "date | value\r" && inputLine != "date | value\n")
                 throw WrongInputFormatException();
+			std::cout << dataLine << std::endl;
+			if (dataLine != "date,exchange_rate" && dataLine != "date,exchange_rate\r" && dataLine != "date,exchange_rate\n")
+				throw WrongInputFormatException();
         }
         else
         {
             throw EmptyFileException(); 
         }
+//		parseDataFile(dataFile);
 
-        std::string inputLine;
-        std::string dataLine;
-
-        while (std::getline(inputFile, inputLine))
-            std::cout << "Input: " << inputLine << std::endl;
-    }
+		parseInputFile(inputFile);
+	}
     catch (std::exception &e)
     {
         std::cerr << "Error: " << e.what() << std::endl;
     }
+}
+
+void	BitcoinExchange::parseDataFile(std::ifstream& database)
+{
+	std::string	line;
+
+	while (getline(database, line, ' '))
+	{
+		std::cout << line << std::endl;
+	}
+}
+
+void	BitcoinExchange::parseInputFile(std::ifstream& input)
+{
+	std::string line;
+
+    while (std::getline(input, line))
+    {
+        size_t delim = line.find(" | ");
+
+        if (delim == std::string::npos)
+        {
+            std::cerr << "Error: bad input => " << line << std::endl;
+            continue;
+        }
+
+        std::string date = line.substr(0, delim);
+        std::string valueStr = line.substr(delim + 3);
+ 
+        float value = atof(valueStr.c_str());
+
+	}   
 }
 
 void	BitcoinExchange::processInput()

@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <fstream>
 #include <iostream>
 #include <map>
 #include <exception>
@@ -51,7 +52,9 @@ class	BitcoinExchange
 
 		//===================[PARSER METHODS]=============================
 
-		void	parseDataBase();
+		void	validateFile();
+		void	parseInputFile(std::ifstream& database);
+		void	parseDataFile(std::ifstream& database);
 		void	processInput();
 		
 		//==================[GETTER & SETTER]=============================
