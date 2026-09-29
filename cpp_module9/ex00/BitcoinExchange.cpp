@@ -99,26 +99,44 @@ void	BitcoinExchange::parseDataFile(std::ifstream& database)
 	}
 }
 
-void	BitcoinExchange::parseInputFile(std::ifstream& input)
+void BitcoinExchange::parseInputFile(std::ifstream& input)
 {
 	std::string line;
 
-    while (std::getline(input, line))
-    {
-        size_t delim = line.find(" | ");
+	std::getline(input, line); 
 
-        if (delim == std::string::npos)
-        {
-            std::cerr << "Error: bad input => " << line << std::endl;
-            continue;
-        }
+	while (std::getline(input, line))
+	{
+		size_t delim = line.find(" | ");
 
-        std::string date = line.substr(0, delim);
-        std::string valueStr = line.substr(delim + 3);
- 
-        float value = atof(valueStr.c_str());
+		if (delim == std::string::npos)
+		{
+			std::cerr << "Error: bad input => " << line << std::endl;
+			continue;
+		}
 
-	}   
+		std::string date = line.substr(0, delim);
+		std::string valueStr = line.substr(delim + 3);
+
+		// TODO: Tarih (YYYY-MM-DD) doğrulaması burada yapılmalı
+
+		float value = atof(valueStr.c_str());
+
+		if (value < 0) {
+			std::cerr << "Error: not a positive number." << std::endl;
+			continue;
+		}
+		if (value > 1000) {
+			std::cerr << "Error: too large a number." << std::endl;
+			continue;
+		}
+
+		_input.insert(std::make_pair(date, value));
+		
+		// Alternatif olarak şu şekilde de eklenebilir:
+		// _input[date] = value;
+		std::cout << date << " | " << _input[date] << std::endl;
+	}
 }
 
 void	BitcoinExchange::processInput()
