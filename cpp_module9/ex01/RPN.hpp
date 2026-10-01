@@ -6,7 +6,7 @@
 /*   By: ax <alermi@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/01 20:31:51 by ax                #+#    #+#             */
-/*   Updated: 2026/10/01 20:57:19 by ax               ###   ########.fr       */
+/*   Updated: 2026/10/01 22:01:30 by ax               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ class	RPN
 		RPN(const RPN& variant);
 		RPN& operator=(const RPN& other);
 
+		bool	checkStack(std::stack<t_token> &stacl);
 		void	calculate(const std::string& expression);
 
 		class	ErrorException : public std::exception
