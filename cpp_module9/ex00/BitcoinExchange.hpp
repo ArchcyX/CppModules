@@ -1,63 +1,54 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   BitcoinExchange.hpp                                 :+:      :+:    :+:   */
+/*   BitcoinExchange.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alermi <alermi@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/27 19:46:39 by alermi            #+#    #+#             */
-/*   Updated: 2026/07/27 20:17:35 by alermi           ###   ########.fr       */
+/*   Updated: 2026/10/01 20:25:45 by ax               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fstream>
+#ifndef BITCOINEXCHANGE_HPP
+#define BITCOINEXCHANGE_HPP
+
 #include <iostream>
+#include <string>
 #include <map>
+#include <fstream>
 #include <exception>
+#include <cstdlib>
 
-
-class	BitcoinExchange
+class BitcoinExchange
 {
-	private:
-		std::string						_inputFile;
-		std::string						_dataFile;
-		std::map<std::string, float>	_data;
-		std::map<std::string, float>	_input;
-		int								_errorFlag;
+private:
+    std::string _inputFile;
+    std::string _dataFile;
+    int _errorFlag;
+    std::map<std::string, float> _database; // Veritabanını tutacağımız map
 
-	public:
-	
-		//===================[EXCEPTION CLASS]===========================
-		class	FileNotOpenException : public std::exception
-		{
-			virtual const char	*what() const throw();
-		};
+    void validateFile();
+    void parseDataFile(std::ifstream& database);
+    void parseInputFile(std::ifstream& input);
+    bool isValidDate(const std::string& date) const; // Tarih doğrulama fonksiyonu
 
-		class	WrongInputFormatException : public std::exception
-		{
-			virtual const char	*what() const throw();
-		};
+public:
+    BitcoinExchange();
+    BitcoinExchange(const std::string inputFile, const std::string dataFile);
+    ~BitcoinExchange();
+    BitcoinExchange(const BitcoinExchange& variant);
+    BitcoinExchange& operator=(const BitcoinExchange& other);
 
-		class	EmptyFileException : public std::exception
-		{
-			virtual const char	*what() const throw();
-		};
-
-		//================[ORHODOX CANNONICAL FORM]======================
-		BitcoinExchange();
-		~BitcoinExchange();
-		BitcoinExchange(const std::string inputFile, const std::string dataFile);
-		BitcoinExchange(const BitcoinExchange& variant);
-		BitcoinExchange& operator=(const BitcoinExchange& other);
-
-		//===================[PARSER METHODS]=============================
-
-		void	validateFile();
-		void	parseInputFile(std::ifstream& database);
-		void	parseDataFile(std::ifstream& database);
-		void	processInput();
-		
-		//==================[GETTER & SETTER]=============================
-		void	setData(const std::map<std::string, float>& data);
-		std::map<std::string, float>	getData()	const;
+    class FileNotOpenException : public std::exception {
+        public: virtual const char* what() const throw();
+    };
+    class WrongInputFormatException : public std::exception {
+        public: virtual const char* what() const throw();
+    };
+    class EmptyFileException : public std::exception {
+        public: virtual const char* what() const throw();
+    };
 };
+
+#endif
