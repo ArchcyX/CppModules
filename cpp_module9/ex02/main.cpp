@@ -10,18 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./PmergeMe.hpp"
+#include "PmergeMe.hpp"
 #include <iostream>
 
-int	main(int argc, char **argv)
+int main(int argc, char **argv)
 {
-	if (argc == 1)
+	try
 	{
-		std::cerr << "Error: Wrong Input" << std::endl;
+		PmergeMe sorter;
+		sorter.execute(argc, argv);
+	}
+	catch (const std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;
 		return (1);
 	}
-	(void) argv;
-	PmergeMe();
-
 	return (0);
 }

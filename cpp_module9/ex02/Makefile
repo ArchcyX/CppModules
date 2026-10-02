@@ -22,7 +22,7 @@ RESET        = \033[0m
 # ============================================================
 #                        PROJECT CONFIG
 # ============================================================
-NAME        = PMergeMe
+NAME        = PmergeMe
 CXX         = c++
 CXXFLAGS    = # -Wall -Wextra -Werror -g -std=c++98
 

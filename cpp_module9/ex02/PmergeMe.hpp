@@ -14,9 +14,7 @@
 
 #include <vector>
 #include <deque>
-#include <string>
 #include <exception>
-#include <cstddef>
 
 class PmergeMe
 {
@@ -26,14 +24,9 @@ class PmergeMe
 		double						_vecTime;
 		double						_deqTime;
 
-		bool	_parseNumber(const std::string& str, unsigned int& out) const;
 		void	_validateArguments(int argc, char **argv) const;
 		void	_printBefore(int argc, char **argv) const;
 		void	_printAfter() const;
-
-		double	_getCurrentTime() const;
-
-		std::size_t	_jacobsthal(std::size_t k) const;
 
 		void	_processVector(int argc, char **argv);
 		void	_processDeque(int argc, char **argv);
