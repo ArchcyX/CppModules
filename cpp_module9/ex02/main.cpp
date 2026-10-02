@@ -5,24 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ax <alermi@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/01 20:32:59 by ax                #+#    #+#             */
-/*   Updated: 2026/10/01 22:28:22 by ax               ###   ########.fr       */
+/*   Created: 2026/10/02 11:12:49 by ax                #+#    #+#             */
+/*   Updated: 2026/10/02 11:12:50 by ax               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "RPN.hpp"
-#include <iostream>
-
-int main(int argc, char **argv)
-{
-    if (argc != 2)
-    {
-        std::cerr << "Error" << std::endl;
-        return (1);
-    }
-
-    RPN rpn;
-    rpn.calculate(argv[1]);
-
-    return (0);
-}
