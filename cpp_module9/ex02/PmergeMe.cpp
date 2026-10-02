@@ -6,13 +6,11 @@
 /*   By: ax <alermi@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/02 11:12:56 by ax                #+#    #+#             */
-/*   Updated: 2026/10/02 12:00:52 by ax               ###   ########.fr       */
+/*   Updated: 2026/10/02 12:13:59 by ax               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./PmergeMe.hpp"
-
-#include "PmergeMe.hpp"
 
 PmergeMe::PmergeMe() : _vecTime(0.0), _deqTime(0.0)
 {
@@ -41,10 +39,36 @@ PmergeMe& PmergeMe::operator=(const PmergeMe& other)
     return (*this);
 }
 
-bool	PmergeMe::_parseNumber(const std::string& str, unsigned int& out)
+bool PmergeMe::_parseNumber(const std::string& str, unsigned int& out) const
 {
+    if (str.empty())
+        return (false);
 
-};
+    size_t i = 0;
+
+    if (str[i] == '+')
+        if (++i == str.length())
+            return (false);
+
+    unsigned int tempValue = 0;
+
+    for (; i < str.length(); ++i)
+    {
+        if (!std::isdigit(str[i]))
+            return (false);
+
+        unsigned int digit = str[i] - '0';
+
+        if (tempValue > (UINT_MAX - digit) / 10)
+            return (false);
+
+        tempValue = tempValue * 10 + digit;
+    }
+
+    out = tempValue;
+ 
+    return (true);
+}
 
 void	PmergeMe::_validateArguments(int argc, char **argv)
 {
