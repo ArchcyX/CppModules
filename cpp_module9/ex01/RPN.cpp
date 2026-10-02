@@ -6,7 +6,7 @@
 /*   By: ax <alermi@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/01 20:31:59 by ax                #+#    #+#             */
-/*   Updated: 2026/10/01 22:28:02 by ax               ###   ########.fr       */
+/*   Updated: 2026/10/02 13:31:16 by ax               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,5 +107,5 @@ void RPN::calculate(const std::string& expression)
 
 const char* RPN::ErrorException::what() const throw()
 {
-    return "Error";
+    return ("Error");
 }
