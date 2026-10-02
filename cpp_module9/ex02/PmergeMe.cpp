@@ -6,11 +6,12 @@
 /*   By: ax <alermi@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/02 11:12:56 by ax                #+#    #+#             */
-/*   Updated: 2026/10/02 12:13:59 by ax               ###   ########.fr       */
+/*   Updated: 2026/10/02 12:21:19 by ax               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./PmergeMe.hpp"
+#include <climits>
 
 PmergeMe::PmergeMe() : _vecTime(0.0), _deqTime(0.0)
 {
@@ -70,53 +71,53 @@ bool PmergeMe::_parseNumber(const std::string& str, unsigned int& out) const
     return (true);
 }
 
-void	PmergeMe::_validateArguments(int argc, char **argv)
+void	PmergeMe::_validateArguments(int argc, char **argv) const
 {
 
-};
+}
 
-void	PmergeMe::_printBefore(int argc, char **argv)
+void	PmergeMe::_printBefore(int argc, char **argv) const
 {
 
-};
+}
 
-void	PmergeMe::_printAfter()
+void	PmergeMe::_printAfter() const
 {
 
-};
+}
 
-double	PmergeMe::_getCurrentTime()
+double	PmergeMe::_getCurrentTime() const
 {
+	return (0);
+}
 
-};
-
-std::size_t	PmergeMe::_jacobsthal(std::size_t k)
+std::size_t	PmergeMe::_jacobsthal(std::size_t k) const
 {
-
-};
+	return (0);
+}
 
 void	PmergeMe::_processVector(int argc, char **argv)
 {
 
-};
+}
 
 void	PmergeMe::_processDeque(int argc, char **argv)
 {
 
-};
+}
 
 void	PmergeMe::_sortVector(std::vector<unsigned int>& vec)
 {
 
-};
+}
 
 void	PmergeMe::_sortDeque(std::deque<unsigned int>& deq)
 {
 
-};
+}
 
 
 void	PmergeMe::execute(int argc, char **argv)
 {
 
-};
+}

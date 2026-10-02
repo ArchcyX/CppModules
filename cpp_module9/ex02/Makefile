@@ -6,7 +6,7 @@
 #    By: ax <alermi@student.42kocaeli.com.tr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/10/02 11:08:33 by ax                #+#    #+#              #
-#    Updated: 2026/10/02 11:11:42 by ax               ###   ########.fr        #
+#    Updated: 2026/10/02 12:17:09 by ax               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,16 +24,16 @@ RESET        = \033[0m
 # ============================================================
 NAME        = PMergeMe
 CXX         = c++
-CXXFLAGS    = -Wall -Wextra -Werror -g -std=c++98
+CXXFLAGS    = # -Wall -Wextra -Werror -g -std=c++98
 
 # ============================================================
 #                        SOURCE & HEADER FILES
 # ============================================================
-HEADERS     = RPN.hpp
+HEADERS     = PmergeMe.hpp
 
 
 SRC         = main.cpp	\
-			  RPN.cpp
+			  PmergeMe.cpp
 
 OBJS        = $(SRC:.cpp=.o)
 
