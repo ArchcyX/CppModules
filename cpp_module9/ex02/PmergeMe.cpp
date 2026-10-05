@@ -141,11 +141,13 @@ extern __inline__ void
 extern __inline__
 	double _getCurrentTime()
 {
-    struct timeval tv;
-    gettimeofday(&tv, NULL);
-    return (static_cast<double>(tv.tv_sec) * 1000000.0 + static_cast<double>(tv.tv_usec));
+	struct timespec ts;
+    
+    clock_gettime(CLOCK_MONOTONIC, &ts);
+    
+    return (static_cast<double>(ts.tv_sec) * 1000000.0 + 
+            static_cast<double>(ts.tv_nsec) / 1000.0);
 }
-
 /* ************************************************************************** */
 /*                               Process Methods                              */
 /* ************************************************************************** */
@@ -198,20 +200,30 @@ extern __inline__ std::size_t
 /* ************************************************************************** */
 
 extern __inline__ void
-	_createPairsVector(std::vector<unsigned int>& vec, 
-                               std::vector<std::pair<unsigned int, unsigned int> >& pairs, 
-                               std::vector<unsigned int>& mainChain, 
-                               unsigned int& straggler, bool& hasStraggler)
+    _createPairsVector(std::vector<unsigned int>& vec, 
+                       std::vector<std::pair<unsigned int, unsigned int> >& pairs, 
+                       std::vector<unsigned int>& mainChain, 
+                       unsigned int& straggler, bool& hasStraggler)
 {
     hasStraggler = (vec.size() % 2 != 0);
-    if (hasStraggler)
-        straggler = vec.back();
 
-    for (std::size_t i = 0; i < vec.size() - (hasStraggler ? 1 : 0); i += 2)
+    std::size_t loopLimit = vec.size();
+    if (hasStraggler)
+    {
+        straggler = vec.back();
+        loopLimit = loopLimit - 1;
+    }
+
+    for (std::size_t i = 0; i < loopLimit; i += 2)
     {
         unsigned int a = vec[i];
-        unsigned int b = vec[i+1];
-        if (a < b) std::swap(a, b);
+        unsigned int b = vec[i + 1];
+        
+        if (a < b) 
+        {
+            std::swap(a, b);
+        }
+
         pairs.push_back(std::make_pair(a, b));
         mainChain.push_back(a);
     }
